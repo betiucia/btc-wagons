@@ -15,7 +15,7 @@ Dependencies:
 # Don't forget to install all dependencies or it will not work.
 
 Features:
-- Multiple stables
+- Multiple stables (you need create)
 - Call your wagon at a stable or via command (configurable)
 - Individual prices for each wagon model
 - Configurable inventory size for each wagon model
@@ -31,6 +31,7 @@ Features:
 
 In development:
 - Transfer wagon to another player
+- More stables
 - Compatibility with more frameworks (but RSG will always be the main one)
 
 Special thanks to MasNana for sharing the mas_huntingwagon code with the community — I was able to learn a lot and enhance this script with that knowledge!
@@ -51,7 +52,7 @@ Dependencias:
 # Não esqueça de instalar todas as dependências ou não irá funcionar.
 
 Possui:
-- Diversos estábulos
+- Diversos estábulos (basta criar)
 - Chamar carroça no estabulo ou por comando (Configurável)
 - Valores independentes para cada modelo de carroça
 - Tamanho de inventário configuravel para cada modelo de carroça
@@ -68,6 +69,7 @@ Possui:
 
 Em desenvolvimento:
 - Transferencia de carroça para outro player
+- Mais estábulos
 - Compatibilidade com mais frameworks (Mas RSG sempre será a principal)
 
 Agradecimento ao MasNana que compartilhou o código de mas_huntingwagon com a comunidade e eu pude aprender muitas coisas para complementar este script!
