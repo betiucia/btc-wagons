@@ -73,6 +73,6 @@ Em desenvolvimento:
 - Transferencia de carroça para outro player
 - Compatibilidade com mais frameworks (Mas RSG sempre será a principal)
 
-Agradecimento ao MasNana que compartilhou o código de mas_huntingwagon coma comunidade e eu pude aprender muitas coisas para complementar este script!
+Agradecimento ao MasNana que compartilhou o código de mas_huntingwagon com a comunidade e eu pude aprender muitas coisas para complementar este script!
 
 
