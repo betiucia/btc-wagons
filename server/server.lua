@@ -204,21 +204,6 @@ AddEventHandler("btc-wagons:updateWagonAuth", function(netId, citizenID, action)
     end
 end)
 
-RegisterNetEvent("btc-wagons:removeWagon")
-AddEventHandler("btc-wagons:removeWagon", function(netId, wagon)
-    if wagons[netId] then
-        local wagon = NetworkGetEntityFromNetworkId(netId)
-        if wagon and DoesEntityExist(wagon) then
-            DeleteEntity(wagon)
-        end
-        if Config.Debug then
-            print("Carroça removida! NetworkID: " ..
-                netId .. " | WagonID: " .. wagons[netId].wagonID .. " | Dono: " .. wagons[netId].owner)
-        end
-
-        wagons[netId] = nil -- Remove da tabela
-    end
-end)
 
 -- Função para obter informações de uma carroça pelo Network ID
 function GetWagonInfoByNetId(netId)
@@ -731,4 +716,30 @@ RegisterNetEvent("btc-wagons:removeAnimalFromWagon", function(wagonID, infos, la
     TriggerClientEvent("btc-wagons:spawnAnimal", src, infos)
     ------ Continuar daqui, antes da função de remover o animal (updateandsave), verificar se o animal existe na carroça e fazer o jogador spawnar o animal
     updateAndSave(wagonID, infos, true)
+end)
+
+------ Remove a Carroça do server
+RegisterNetEvent("btc-wagons:removeWagon")
+AddEventHandler("btc-wagons:removeWagon", function(netId, wagon)
+    if wagons[netId] then
+        local wagon = NetworkGetEntityFromNetworkId(netId)
+        if wagon and DoesEntityExist(wagon) then
+            DeleteEntity(wagon)
+            if Config.Debug then
+                print("Carroça removida! NetworkID: " ..
+                    netId .. " | WagonID: " .. wagons[netId].wagonID .. " | Dono: " .. wagons[netId].owner)
+            end
+        end
+
+        wagons[netId] = nil -- Remove da tabela
+    else --- caso seja o resource stop
+        local wagon = NetworkGetEntityFromNetworkId(netId)
+        if wagon and DoesEntityExist(wagon) then
+            DeleteEntity(wagon)
+            wagons[netId] = nil -- Remove da tabela
+            if Config.Debug then
+                print("Carroça removida!")
+            end
+        end
+    end
 end)

@@ -255,7 +255,7 @@ Config.Wagons = {
             priceGold = 18,       -- Preço da carroça em gold
             maxAnimals = false,   -- Se a carroça pode carregar animais, colocar maximo ou false/0
         },
-        stagecoach004 = {         -- Hash modelo da carroça
+        stagecoach004x = {         -- Hash modelo da carroça
             name = "Carruagem Blindada 01",
             maxWeight = 100,      -- Peso máximo que a carroça pode carregar
             slots = 20,           -- Número de slots disponíveis na carroça

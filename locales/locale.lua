@@ -75,8 +75,10 @@ Locale = {
         player_stash = 'A pessoa ',
         player_stash_02 =' pediu permissão para abrir o inventário da carroça, permitir?',
         no_have_item = 'Você não possui ',
-        fail_lockpick = 'Você falhou'
+        fail_lockpick = 'Você falhou',
+        wagon_no_animals = 'Não há animais/peles na carroça'
     },
+
     ["en"] =
     {
         cl_your_wagon = "Wagon",
@@ -150,7 +152,8 @@ Locale = {
         player_stash = "Player ",
         player_stash_02 = " requested permission to access the wagon inventory. Allow?",
         no_have_item = "You don't have ",
-        fail_lockpick = "You failed"
+        fail_lockpick = "You failed",
+        wagon_no_animals = 'There are no animals/pelts in the wagon'
     },
 
 }

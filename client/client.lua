@@ -467,7 +467,7 @@ Citizen.CreateThread(function()
                     PromptSetVisible(StockCarcassPrompt, true)
                 end
             end
-        elseif isNearWagon and not IsPedInAnyVehicle(ped) and not isOwner then --- Aqui é a lógica de prompts para quem não é dono
+        elseif isNearWagon and not PedInVehicle and not isOwner and not openMenu then --- Aqui é a lógica de prompts para quem não é dono
             waitTime = 2                                                       -- Atualiza para checagem rápida quando perto
             local Stash = CreateVarString(10, 'LITERAL_STRING', locale['cl_your_wagon'])
             PromptSetActiveGroupThisFrame(WagonGroup, Stash)
@@ -565,7 +565,7 @@ function DeleteWagon()
         local netId = NetworkGetNetworkIdFromEntity(mywagon)
 
         -- Remover do servidor
-        TriggerServerEvent("btc-wagons:removeWagon", netId, wagon)
+        TriggerServerEvent("btc-wagons:removeWagon", netId, mywagon)
         -- DeleteVehicle(mywagon)
         mywagon = false
         RemoveBlip(wagonBlip)
@@ -789,6 +789,13 @@ end
 function CarcassInWagon(wagonID)
     local carcassInWagon = {}
     TriggerServerCallback("btc-wagons:getAnimalStorage", function(menuData)
+
+        if not menuData or #menuData == 0 then
+            Notify(locale["wagon_no_animals"], 5000, "error")
+            openMenu = false
+            return
+        end
+
         -- Salva no cache para próximas chamadas
         for k, v in pairs(menuData) do
             table.insert(carcassInWagon, {
@@ -863,4 +870,26 @@ AddEventHandler("btc-wagons:spawnAnimal", function(data)
     FreezeEntityPosition(cargo, false)
     SetEntityVisible(cargo, true)
     Citizen.InvokeNative(0x18FF3110CF47115D, cargo, 21, false) --SetEntityCarryingFlag
+end)
+
+AddEventHandler("onResourceStop", function(resourceName)
+    if GetCurrentResourceName() ~= resourceName then return end
+
+    if mywagon and DoesEntityExist(mywagon) then
+        local netId = NetworkGetNetworkIdFromEntity(mywagon)
+
+        if Config.Debug then
+            print('Removendo Carroça')
+        end
+
+        -- Remover do servidor
+        TriggerServerEvent("btc-wagons:removeWagon", netId, mywagon)
+        -- DeleteVehicle(mywagon)
+        mywagon = false
+        RemoveBlip(wagonBlip)
+        if animalStorageCache[wagonNetId] then
+            animalStorageCache[wagonNetId] = nil
+        end
+        wagonVerificationCache[netId] = nil
+    end
 end)
