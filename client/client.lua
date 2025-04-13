@@ -16,6 +16,19 @@ local locale = Locale[Config.Locale]
 local openMenu = false
 local cargo = false
 
+-- If you wish to trigger the action from another script, use:
+RegisterNetEvent('btc-wagons:client:dellwagon')
+AddEventHandler('btc-wagons:client:dellwagon', function()
+    DeleteWagon()
+end)
+
+RegisterNetEvent('btc-wagons:client:callwagon')
+AddEventHandler('btc-wagons:client:callwagon', function()
+    CallWagon()
+end)
+---- Thanks daryldixon4074 for idea :)
+----
+
 
 if Config.Debug then
     RegisterCommand('delete', function()

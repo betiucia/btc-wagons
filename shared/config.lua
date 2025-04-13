@@ -1,8 +1,16 @@
 Config = {}
 Config.FrameWork = 'rsg'               -- Qual framework está utilizando, no caso o rsg
 Config.Locale = 'pt-br'                -- Idioma que está utilizando, no caso o português
-Config.Debug = true                    -- Ativar debug para ver os logs no console do servidor
+Config.Debug = false                    -- Ativar debug para ver os logs no console do servidor
+
+
+
+------
 Config.SpawnKey = "INPUT_OPEN_JOURNAL" -- Tecla para abrir chamar a carroça, para desativar utilize false
+-- Caso queira utilizar uma chamda externa (Por exemplo rsg-radialmenu) utilize:
+-- Call: TriggerEvent('btc-wagons:client:callwagon')
+-- Delete: TriggerEvent('btc-wagons:client:dellwagon')
+
 Config.SpawnRadius = 100
 
 Config.MoneyType = {
