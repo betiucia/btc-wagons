@@ -1,4 +1,45 @@
 # btc-wagons
+
+Do not sell or pretend this is your own work!
+If you have anything to add, share it with the community.
+
+What is it?
+A wagon script.
+
+Dependencies:
+
+ox_lib: https://github.com/overextended/ox_lib
+
+redemrp_menu_base: https://github.com/RedEM-RP/redemrp_menu_base
+
+lockpick: Unknown author, included in the main folder as "lockpick.rar"
+
+# Don't forget to install all dependencies or it will not work.
+
+Features:
+
+- Multiple stables
+- Call your wagon at a stable or via command (configurable)
+- Individual prices for each wagon model
+- Configurable inventory size for each wagon model
+- Various configurable options in the script
+- Multiple wagon models
+- Customization of colors, props, etc.
+- Wagon inventory
+- Shared wagon inventory
+- Robbery of wagon inventory
+- Store skins/animals in the wagon
+- Everything saved in the database
+- Maximum number of wagons per player
+
+In development:
+
+- Transfer wagon to another player
+- Compatibility with more frameworks (but RSG will always be the main one)
+
+Special thanks to MasNana for sharing the mas_huntingwagon code with the community — I was able to learn a lot and enhance this script with that knowledge!
+----------------------------------------
+
 Não venda ou finja que isso é um trabalho seu!
 Se tiver algo a incrementar compartilhe com a comunidade.
 
