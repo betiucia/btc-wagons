@@ -7,17 +7,14 @@ What is it?
 A wagon script.
 
 Dependencies:
-
-ox_lib: https://github.com/overextended/ox_lib
-
-redemrp_menu_base: https://github.com/RedEM-RP/redemrp_menu_base
-
-lockpick: Unknown author, included in the main folder as "lockpick.rar"
+- ox_lib: https://github.com/overextended/ox_lib
+- redemrp_menu_base: https://github.com/RedEM-RP/redemrp_menu_base
+- lockpick: Unknown author, included in the main folder as "lockpick.rar"
+- sql: install btc-wagons.sql
 
 # Don't forget to install all dependencies or it will not work.
 
 Features:
-
 - Multiple stables
 - Call your wagon at a stable or via command (configurable)
 - Individual prices for each wagon model
@@ -33,7 +30,6 @@ Features:
 - Maximum number of wagons per player
 
 In development:
-
 - Transfer wagon to another player
 - Compatibility with more frameworks (but RSG will always be the main one)
 
@@ -50,6 +46,7 @@ Dependencias:
 - ox_lib: https://github.com/overextended/ox_lib
 - redemrp_menu_base: https://github.com/RedEM-RP/redemrp_menu_base
 - lockpick: Não sei o autor, está dentro da pasta principal como "lockpick.rar"
+- sql: instale btc-wagons.sql 
 
 # Não esqueça de instalar todas as dependências ou não irá funcionar.
 
