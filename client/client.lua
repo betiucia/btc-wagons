@@ -468,7 +468,7 @@ Citizen.CreateThread(function()
                 end
             end
         elseif isNearWagon and not IsPedInAnyVehicle(ped) and not isOwner then --- Aqui é a lógica de prompts para quem não é dono
-            waitTime = 2 -- Atualiza para checagem rápida quando perto
+            waitTime = 2                                                       -- Atualiza para checagem rápida quando perto
             local Stash = CreateVarString(10, 'LITERAL_STRING', locale['cl_your_wagon'])
             PromptSetActiveGroupThisFrame(WagonGroup, Stash)
             PromptSetEnabled(DeletePrompt, false)
@@ -490,6 +490,20 @@ Citizen.CreateThread(function()
                 PromptSetEnabled(StashPrompt, true)
                 PromptSetVisible(StashPrompt, true)
             end
+            if maxAnimal > 0 then
+                PromptSetEnabled(StockCarcassPrompt, true)
+                PromptSetVisible(StockCarcassPrompt, true)
+                if PromptHasHoldModeCompleted(StockCarcassPrompt) then
+                    PromptSetEnabled(StockCarcassPrompt, false)
+                    PromptSetVisible(StockCarcassPrompt, false)
+
+                    StoreCarriedEntityInWagon()
+                    Wait(1000)
+
+                    PromptSetEnabled(StockCarcassPrompt, true)
+                    PromptSetVisible(StockCarcassPrompt, true)
+                end
+            end
         end
         Wait(waitTime)
     end
@@ -497,19 +511,18 @@ end)
 ---------- Dar permissão para abri inventário
 RegisterNetEvent('btc-wagon:askOwnerPermission')
 AddEventHandler('btc-wagon:askOwnerPermission', function(data)
-local alert = lib.alertDialog({
-    header = locale['alert'],
-    content = locale['player_stash']..data.firstname..' '..data.lastname..locale['player_stash_02'],
-    centered = true,
-    cancel = true
-})
+    local alert = lib.alertDialog({
+        header = locale['alert'],
+        content = locale['player_stash'] .. data.firstname .. ' ' .. data.lastname .. locale['player_stash_02'],
+        centered = true,
+        cancel = true
+    })
     local permission = alert
     TriggerServerEvent('btc-wagons:giveOwnerPermission', permission, data)
 end)
 
 RegisterNetEvent('btc-wagons:receiveWagonData')
 AddEventHandler('btc-wagons:receiveWagonData', function(wagonModel, customData, animalsData, myWagonID)
-
     if mywagon and DoesEntityExist(mywagon) then
         DeleteWagon()
         Wait(500)
@@ -558,7 +571,7 @@ function DeleteWagon()
         RemoveBlip(wagonBlip)
         if animalStorageCache[wagonNetId] then
             animalStorageCache[wagonNetId] = nil
-        end 
+        end
         wagonVerificationCache[netId] = nil
     end
 end
