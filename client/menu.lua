@@ -216,7 +216,7 @@ function BuyWagonMenu(store, wagonType)
             menuCooldown = true
 
             SpawnShowroomWagon(data.current.wagonModel, store)
-            Wait(100)
+            Wait(300)
             menuCooldown = false
         end
     )

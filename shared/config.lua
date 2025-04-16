@@ -2,7 +2,7 @@ Config = {}
 Config.FrameWork = 'rsg'               -- Qual framework está utilizando, no caso o rsg
 Config.Locale = 'pt-br'                -- Idioma que está utilizando, no caso o português
 Config.Debug = false                    -- Ativar debug para ver os logs no console do servidor
-
+Config.Target = true                    -- Para usar eye Targ -- ox_target necessário
 
 
 ------
@@ -44,10 +44,40 @@ Config.Blip = {
 Config.Stores = {
     Valentine = {
         coords = vector3(-355.11, 775.18, 116.22),            -- Coordenadas do local onde o menu será aberto
-        npcmodel = `a_m_m_nbxlaborers_01`,                    -- Modelo do NPC que abrirá o menu
+        npcmodel = `u_m_m_bwmstablehand_01`,                    -- Modelo do NPC que abrirá o menu
         npccoords = vector4(-355.11, 775.18, 116.22, 321.41), -- Coordenadas do NPC que abrirá o menu
         previewWagon = vec4(-371.76, 786.87, 115.16, 272.08), -- Local Para visualizar a carroça
-    }
+        cameraPreviewWagon = vec4(-371.76 + 8 , 786.87, 115.16 + 2 , 272.08),
+    },
+    SaintDenis = {
+        coords = vector3(2506.02, -1459.52, 46.37),            -- Coordenadas do local onde o menu será aberto
+        npcmodel = `u_m_m_bwmstablehand_01`,                    -- Modelo do NPC que abrirá o menu
+        npccoords = vector4(2506.02, -1459.52, 46.37, 66.78), -- Coordenadas do NPC que abrirá o menu
+        previewWagon = vec4(2502.689, -1441.257, 45.313, 177.895), -- Local Para visualizar a carroça
+        cameraPreviewWagon = vec4(2502.689, -1441.257 - 8, 45.313 + 3, 177.895),
+    },
+    Strawberry = {
+        coords = vector3(-1817.261, -559.600, 156.177),            -- Coordenadas do local onde o menu será aberto
+        npcmodel = `u_m_m_bwmstablehand_01`,                    -- Modelo do NPC que abrirá o menu
+        npccoords = vector4(-1817.261, -559.600, 156.177, 164.684), -- Coordenadas do NPC que abrirá o menu
+        previewWagon = vec4(-1821.550, -561.547, 155.060, 253.239), -- Local Para visualizar a carroça
+        cameraPreviewWagon = vec4(-1821.550 + 6, -561.547, 155.060 + 2 , 253.239),
+    },
+    BlackWater = {
+        coords = vector3(-878.606, -1368.115, 43.527),            -- Coordenadas do local onde o menu será aberto
+        npcmodel = `u_m_m_bwmstablehand_01`,                    -- Modelo do NPC que abrirá o menu
+        npccoords = vector4(-878.606, -1368.115, 43.527, 276.638), -- Coordenadas do NPC que abrirá o menu
+        previewWagon = vec4(-865.77, -1366.23, 43.49, 88.50), -- Local Para visualizar a carroça
+        cameraPreviewWagon = vec4(-865.77 - 8, -1366.23, 43.49 + 2, 88.50),
+    },
+    Tumbleweed = {
+        coords = vector3(-5515.295, -3039.497, -2.388),            -- Coordenadas do local onde o menu será aberto
+        npcmodel = `u_m_m_bwmstablehand_01`,                    -- Modelo do NPC que abrirá o menu
+        npccoords = vector4(-5515.295, -3039.497, -2.388, 182.161), -- Coordenadas do NPC que abrirá o menu
+        previewWagon = vec4(-5522.063, -3044.438, -3.388, 265.561), -- Local Para visualizar a carroça
+        cameraPreviewWagon = vec4(-5522.063 + 8, -3044.438, -3.388 + 2, 265.561),
+    },
+
 }
 
 Config.Wagons = {

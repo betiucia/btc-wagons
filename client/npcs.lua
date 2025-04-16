@@ -1,8 +1,8 @@
 local spawnedPeds = {}
 
 Citizen.CreateThread(function()
-    local sleep = 500
-    while true do      
+    while true do   
+        Wait(500)   
         for k,v in pairs(Config.Stores) do
             local playerCoords = GetEntityCoords(PlayerPedId())
             local distance = #(playerCoords - v.npccoords.xyz)
@@ -14,7 +14,7 @@ Citizen.CreateThread(function()
             
             if distance >= 50 and spawnedPeds[k] then
                     for i = 255, 0, -51 do
-                        Citizen.Wait(50)
+                        Wait(50)
                         SetEntityAlpha(spawnedPeds[k].spawnedPed, i, false)
                     end
                 DeletePed(spawnedPeds[k].spawnedPed)
@@ -22,14 +22,13 @@ Citizen.CreateThread(function()
             end
 
         end
-        Wait(sleep)
     end
 end)
 
 function NearPed(npcmodel, npccoords)
     RequestModel(npcmodel)
     while not HasModelLoaded(npcmodel) do
-        Citizen.Wait(50)
+        Wait(50)
     end
     spawnedPed = CreatePed(npcmodel, npccoords.x, npccoords.y, npccoords.z - 1.0, npccoords.w, false, false, 0, 0)
     SetEntityAlpha(spawnedPed, 0, false)
@@ -47,7 +46,7 @@ function NearPed(npcmodel, npccoords)
     end
     -- end of relationship group
         for i = 0, 255, 51 do
-            Citizen.Wait(50)
+            Wait(50)
             SetEntityAlpha(spawnedPed, i, false)
         end
     return spawnedPed

@@ -183,6 +183,7 @@ local function SpawnWagon(model, tint, livery, props, extra, lantern, myWagonID)
     wagonBlip = Citizen.InvokeNative(0x23F74C2FDA6E7C61, -1230993421, mywagon)
     SetBlipSprite(wagonBlip, blipModel, true)
     Citizen.InvokeNative(0x9CB1A1623062F402, wagonBlip, locale['cl_your_wagon'])
+
 end
 
 --- Controlar a Entidade
@@ -616,6 +617,7 @@ function CallWagon()
     end
 
     TriggerServerEvent('btc-wagons:getWagonDataByCitizenID')
+
 end
 
 ------------------------- Função para carcaças
@@ -884,6 +886,9 @@ AddEventHandler("btc-wagons:spawnAnimal", function(data)
     SetEntityVisible(cargo, true)
     Citizen.InvokeNative(0x18FF3110CF47115D, cargo, 21, false) --SetEntityCarryingFlag
 end)
+
+--------------- OX-TARGET
+
 
 AddEventHandler("onResourceStop", function(resourceName)
     if GetCurrentResourceName() ~= resourceName then return end

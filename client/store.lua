@@ -36,6 +36,7 @@ function SpawnShowroomWagon(model, store)
     isSpawningWagon = true -- trava
 
     local showroomCoords = Config.Stores[store].previewWagon
+    local showroomCameraCoords = Config.Stores[store].cameraPreviewWagon
 
     -- Remove a carroça anterior se existir
     if showroomWagon and DoesEntityExist(showroomWagon) then
@@ -71,7 +72,7 @@ function SpawnShowroomWagon(model, store)
     FreezeEntityPosition(showroomWagon, true)
 
     -- Ativa a câmera para visualização
-    SetUpShowroomCamera(showroomCoords, showroomWagon)
+    SetUpShowroomCamera(showroomCameraCoords, showroomWagon)
 
     -- Libera para novos spawns
     Wait(250) -- leve delay pra garantir segurança
@@ -88,7 +89,7 @@ function SetUpShowroomCamera(cameraPosition, targetEntity)
 
     -- Criando a câmera
     showroomCam = CreateCam("DEFAULT_SCRIPTED_CAMERA", true)
-    SetCamCoord(showroomCam, cameraPosition.x + 8.0, cameraPosition.y, cameraPosition.z + 4.0) -- Distância fixa da carroça
+    SetCamCoord(showroomCam, cameraPosition.x, cameraPosition.y, cameraPosition.z) -- Distância fixa da carroça
     PointCamAtEntity(showroomCam, targetEntity, 0, 0, 0, true)                                 -- Aponta a câmera para a carroça
 
     SetCamActive(showroomCam, true)
@@ -207,6 +208,7 @@ end)
 -- Função para criar a carroça fantasma no showroom
 function SpawnShowroomMyWagon(model, store, custom)
     local showroomCoords = Config.Stores[store].previewWagon
+    local showroomCameraCoords = Config.Stores[store].cameraPreviewWagon
 
     -- Se a carroça já existe, apenas atualizamos suas propriedades
     if showroomWagon and DoesEntityExist(showroomWagon) then
@@ -230,7 +232,7 @@ function SpawnShowroomMyWagon(model, store, custom)
     FreezeEntityPosition(showroomWagon, true)
 
     -- Ativa a câmera para visualização
-    SetUpShowroomCamera(showroomCoords, showroomWagon)
+    SetUpShowroomCamera(showroomCameraCoords, showroomWagon)
 end
 
 -- Função separada para atualizar apenas as propriedades visuais
@@ -286,7 +288,7 @@ function SetUpShowroomCamera(cameraPosition, targetEntity)
 
     -- Criando a câmera
     showroomCam = CreateCam("DEFAULT_SCRIPTED_CAMERA", true)
-    SetCamCoord(showroomCam, cameraPosition.x + 8.0, cameraPosition.y, cameraPosition.z + 4.0) -- Distância fixa da carroça
+    SetCamCoord(showroomCam, cameraPosition.x , cameraPosition.y, cameraPosition.z) -- Distância fixa da carroça
     PointCamAtEntity(showroomCam, targetEntity, 0, 0, 0, true)                                 -- Aponta a câmera para a carroça
 
     SetCamActive(showroomCam, true)
