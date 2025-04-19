@@ -195,11 +195,9 @@ function CreateWagonTarget()
         local networkId = NetworkGetNetworkIdFromEntity(mywagon)
 
         while not NetworkDoesEntityExistWithNetworkId(networkId) do
-            print('não registrou')
             Wait(50) -- Aguarda até que a carroça esteja completamente registrada na rede
         end
-        print('registrou')
-
+        if networkId then
         exports.ox_target:addEntity(networkId, {
             {
                 name = 'npc_wagonStash',
@@ -211,6 +209,7 @@ function CreateWagonTarget()
                 distance = 1.5
             }
         })
+        Wait(100)
         exports.ox_target:addEntity(networkId, {
             {
                 name = 'npc_wagonShowCarcass',
@@ -222,6 +221,7 @@ function CreateWagonTarget()
                 distance = 1.5
             }
         })
+        Wait(100)
         exports.ox_target:addEntity(networkId, {
             {
                 name = 'npc_wagonStockCarcass',
@@ -233,6 +233,7 @@ function CreateWagonTarget()
                 distance = 1.5
             }
         })
+        Wait(100)
         exports.ox_target:addEntity(networkId, {
             {
                 name = 'npc_wagonDelete',
@@ -244,6 +245,9 @@ function CreateWagonTarget()
                 distance = 1.5
             }
         })
+    else
+        CreateWagonTarget()
+    end
 end
 
 --- Controlar a Entidade
