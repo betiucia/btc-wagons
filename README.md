@@ -8,7 +8,7 @@ A wagon script.
 
 Dependencies:
 - ox_lib: https://github.com/overextended/ox_lib
-- redemrp_menu_base: https://github.com/RedEM-RP/redemrp_menu_base
+- btc-redemrp_menu_base: https://github.com/betiucia/btc-redemrp_menu_base
 - lockpick: Unknown author, included in the main folder as "lockpick.rar"
 - sql: install btc-wagons.sql
 
@@ -45,7 +45,7 @@ Oque é? Um script de carroças.
 
 Dependencias:
 - ox_lib: https://github.com/overextended/ox_lib
-- redemrp_menu_base: https://github.com/RedEM-RP/redemrp_menu_base
+- btc-redemrp_menu_base: https://github.com/betiucia/btc-redemrp_menu_base
 - lockpick: Não sei o autor, está dentro da pasta principal como "lockpick.rar"
 - sql: instale btc-wagons.sql 
 

@@ -1,7 +1,7 @@
 local locale = Locale[Config.Locale]
 
 MenuData = {}
-TriggerEvent("redemrp_menu_base:getData", function(call)
+TriggerEvent("btc-redemrp_menu_base:getData", function(call)
     MenuData = call
 end)
 
@@ -13,11 +13,13 @@ AddEventHandler('btc-wagons:client:openStore', function(store)
             label = locale["cl_your_wagons"],
             value = "mywagons",
             description = locale["cl_see_your_wagons"],
+            image = "nui://btc-wagons/images/wagon.png",
         },
         {
             label = locale["cl_wagon_buy"],
             value = "buywagontype",
             desc = locale["cl_wagon_buy_desc"],
+            image = "nui://btc-wagons/images/buy_wagon.png",
         }
     }
     local nuifocus = false
@@ -57,6 +59,7 @@ for type, wagons in pairs(Config.Wagons) do
     table.insert(wagonsTypeData, {
         label = locale[type],
         value = type,
+        image = "nui://btc-wagons/images/"..type..'.png',
         desc = "Escolha o modelo de carroça",
     })
 end
@@ -283,6 +286,7 @@ function SelectMyWagon(store, custom, wagonModel)
     table.insert(myWagonCustomData, {
         label = (locale["activate_wagon"] or "Ativar Carroça"),
         value = "activate",
+        image = "nui://btc-wagons/images/kit_upgrade_camp_wagon.png",
         desc = locale["activate_wagon_desc"] or "Ative sua carroça e a leve para o mapa.",
     })
 
@@ -293,6 +297,7 @@ function SelectMyWagon(store, custom, wagonModel)
                 table.insert(myWagonCustomData, {
                     label = locale[type] .. " - $" .. Config.CustomPrice[type],
                     value = type,
+                    image = "nui://btc-wagons/images/wagons_"..type..'.png',
                     custom = currentWagonCustom[type] or {},
                     desc = locale[type .. "_desc"] or "Sem descrição",
                 })
@@ -311,6 +316,7 @@ function SelectMyWagon(store, custom, wagonModel)
     table.insert(myWagonCustomData, {
         label = "🛑 " .. (locale["sell_wagon"] or "Vender Carroça"),
         value = "sell",
+        image = "nui://btc-wagons/images/delete_wagon.png",
         desc = locale["sell_wagon_desc"] or "Venda essa carroça e recupere parte do valor pago.",
     })
 

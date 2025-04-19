@@ -176,14 +176,74 @@ local function SpawnWagon(model, tint, livery, props, extra, lantern, myWagonID)
 
     getControlOfEntity(mywagon)
 
+    if Config.Target then
+        CreateWagonTarget(mywagon)
+    end
+
     TriggerServerEvent("btc-wagons:registerWagon", networkId, myWagonID, model) -- Envia o evento para o servidor com o ID da rede
+
 
     -- Criando blip
     local blipModel = GetHashKey("blip_player_coach")
     wagonBlip = Citizen.InvokeNative(0x23F74C2FDA6E7C61, -1230993421, mywagon)
     SetBlipSprite(wagonBlip, blipModel, true)
     Citizen.InvokeNative(0x9CB1A1623062F402, wagonBlip, locale['cl_your_wagon'])
+end
 
+function CreateWagonTarget()
+
+        local networkId = NetworkGetNetworkIdFromEntity(mywagon)
+
+        while not NetworkDoesEntityExistWithNetworkId(networkId) do
+            print('não registrou')
+            Wait(50) -- Aguarda até que a carroça esteja completamente registrada na rede
+        end
+        print('registrou')
+
+        exports.ox_target:addEntity(networkId, {
+            {
+                name = 'npc_wagonStash',
+                icon = 'fa-solid fa-box-open',
+                label = locale['cl_wagon_stash'],
+                onSelect = function()
+                    StashWagon()
+                end,
+                distance = 1.5
+            }
+        })
+        exports.ox_target:addEntity(networkId, {
+            {
+                name = 'npc_wagonShowCarcass',
+                icon = 'fa-solid fa-boxes-stacked',
+                label = locale['cl_see_carcass'],
+                onSelect = function()
+                    ShowCarcass()
+                end,
+                distance = 1.5
+            }
+        })
+        exports.ox_target:addEntity(networkId, {
+            {
+                name = 'npc_wagonStockCarcass',
+                icon = 'fa-solid fa-paw',
+                label = locale['cl_stock_carcass'],
+                onSelect = function()
+                    StockCarcass()
+                end,
+                distance = 1.5
+            }
+        })
+        exports.ox_target:addEntity(networkId, {
+            {
+                name = 'npc_wagonDelete',
+                icon = 'fa-solid fa-warehouse',
+                label = locale['cl_flee_wagon'],
+                onSelect = function()
+                    DeleteThisWagon()
+                end,
+                distance = 1.5
+            }
+        })
 end
 
 --- Controlar a Entidade
@@ -200,18 +260,19 @@ function getControlOfEntity(entity)
     return NetworkHasControlOfEntity(entity)
 end
 
-CreateThread(function()
-    while true do
-        if (timeout) then
-            if (timeoutTimer == 0) then
-                timeout = false
-            end
-            timeoutTimer = timeoutTimer - 1
-            Wait(1000)
-        end
-        Wait(0)
-    end
-end)
+--- Não usar, só se precisar!
+-- CreateThread(function()
+--     while true do
+--         if (timeout) then
+--             if (timeoutTimer == 0) then
+--                 timeout = false
+--             end
+--             timeoutTimer = timeoutTimer - 1
+--             Wait(1000)
+--         end
+--         Wait(0)
+--     end
+-- end)
 
 -- Função para verificar a proximidade do jogador com uma carroça
 
@@ -294,12 +355,12 @@ end
 
 local animalStorageCache = {}
 
-Citizen.CreateThread(function()
-    while true do
+if Config.Target then
+    ------------------------- Olhar o Baú
+    function StashWagon()
         GetClosestWagon(function(wagon, dist, owner, id, model, netId)
             if wagon then
                 if id then
-                    isNearWagon = true
                     isOwner = owner
                     wagonID = id
                     wagonModel = model
@@ -317,211 +378,345 @@ Citizen.CreateThread(function()
                             end
                         end
                         animalStorageCache[netId] = maxAnimal
-
-                        if Config.Debug then
-                            print("🐎 Máximo de animais para o modelo", model, ">", maxAnimal)
-                        end
                     end
-
-                    -- if Config.Debug then
-                    --     print("🚂 Carroça encontrada a " .. dist .. " metros! | WagonID: " .. wagonID)
-                    -- end
-                else
-                    isNearWagon = false
-                    -- if Config.Debug then
-                    --     print("🚂 Carroça encontrada a " .. dist .. " metros! (Sem dono registrado)")
-                    -- end
+                    TriggerServerEvent("btc-wagons:openWagonStash", 'Wagon_Stash_' .. wagonID, wagonModel, wagonID,
+                        wagonNetId)
                 end
-            else
-                isNearWagon = false
             end
         end)
-
-        Wait(500)
     end
-end)
 
--- set Stash prompt
-function StashPrompt() -- Abrir o inventário da carroça
-    Citizen.CreateThread(function()
-        local str = locale['cl_wagon_stash']
-        StashPrompt = Citizen.InvokeNative(0x04F97DE45A519419)
-        PromptSetControlAction(StashPrompt, GetHashKey(Config.Keys.OpenWagonStash))
-        local str = CreateVarString(10, 'LITERAL_STRING', str)
-        PromptSetText(StashPrompt, str)
-        PromptSetEnabled(StashPrompt, true)
-        PromptSetVisible(StashPrompt, true)
-        PromptSetHoldMode(StashPrompt, true)
-        PromptSetGroup(StashPrompt, WagonGroup)
-        PromptRegisterEnd(StashPrompt)
-    end)
-end
+    function ShowCarcass()
+        GetClosestWagon(function(wagon, dist, owner, id, model, netId)
+            if wagon then
+                if id then
+                    isOwner = owner
+                    wagonID = id
+                    wagonModel = model
+                    wagonNetId = netId
 
-function DeletePrompt() -- Mandar a carroça embora
-    Citizen.CreateThread(function()
-        local str = locale['cl_flee_wagon']
-        DeletePrompt = Citizen.InvokeNative(0x04F97DE45A519419)
-        PromptSetControlAction(DeletePrompt, GetHashKey('INPUT_FRONTEND_CANCEL'))
-        local str = CreateVarString(10, 'LITERAL_STRING', str)
-        PromptSetText(DeletePrompt, str)
-        PromptSetEnabled(DeletePrompt, true)
-        PromptSetVisible(DeletePrompt, true)
-        PromptSetHoldMode(DeletePrompt, true)
-        PromptSetGroup(DeletePrompt, WagonGroup)
-        PromptRegisterEnd(DeletePrompt)
-    end)
-end
-
-function CarcassPrompt() -- Olhar os animais/pele na carroça
-    Citizen.CreateThread(function()
-        local str = locale['cl_see_carcass']
-        CarcassPrompt = Citizen.InvokeNative(0x04F97DE45A519419)
-        PromptSetControlAction(CarcassPrompt, GetHashKey('INPUT_INTERACT_LOCKON_ANIMAL'))
-        local str = CreateVarString(10, 'LITERAL_STRING', str)
-        PromptSetText(CarcassPrompt, str)
-        PromptSetEnabled(CarcassPrompt, true)
-        PromptSetVisible(CarcassPrompt, true)
-        PromptSetHoldMode(CarcassPrompt, true)
-        PromptSetGroup(CarcassPrompt, WagonGroup)
-        PromptRegisterEnd(CarcassPrompt)
-    end)
-end
-
-local StoredWagonAnimals = {} -- Armazenar os animais/pele na carroça
-function StockCarcassPrompt() --- Armazenar os animais/pele na carroça
-    Citizen.CreateThread(function()
-        local str = locale['cl_stock_carcass']
-        StockCarcassPrompt = Citizen.InvokeNative(0x04F97DE45A519419)
-        PromptSetControlAction(StockCarcassPrompt, GetHashKey('INPUT_DOCUMENT_PAGE_PREV'))
-        local str = CreateVarString(10, 'LITERAL_STRING', str)
-        PromptSetText(StockCarcassPrompt, str)
-        PromptSetEnabled(StockCarcassPrompt, true)
-        PromptSetVisible(StockCarcassPrompt, true)
-        PromptSetHoldMode(StockCarcassPrompt, true)
-        PromptSetGroup(StockCarcassPrompt, WagonGroup)
-        PromptRegisterEnd(StockCarcassPrompt)
-    end)
-end
-
--- Função para detectar a interação de mouse (botão direito)
-Citizen.CreateThread(function()
-    StashPrompt()
-    DeletePrompt()
-    CarcassPrompt()
-    StockCarcassPrompt()
-    local ped = PlayerPedId()
-    while true do
-        local waitTime = 2000 -- Tempo padrão de espera
-        local PedInVehicle = IsPedInAnyVehicle(ped)
-        local maxAnimal = animalStorageCache[wagonNetId] or 0
-
-        if isNearWagon and not PedInVehicle and isOwner and not openMenu then
-            waitTime = 2 -- Atualiza para checagem rápida quando perto
-            local Stash = CreateVarString(10, 'LITERAL_STRING', locale['cl_your_wagon'])
-            PromptSetActiveGroupThisFrame(WagonGroup, Stash)
-
-            ----------------- Deixar os Prompts invisíveis para não aparecerem na tela até a verificação correta
-            PromptSetEnabled(CarcassPrompt, false)
-            PromptSetVisible(CarcassPrompt, false)
-            PromptSetEnabled(StockCarcassPrompt, false)
-            PromptSetVisible(StockCarcassPrompt, false)
-
-            if PromptHasHoldModeCompleted(StashPrompt) then
-                -- Desativa temporariamente o prompt para evitar múltiplos acionamentos
-                PromptSetEnabled(StashPrompt, false)
-                PromptSetVisible(StashPrompt, false)
-                TriggerServerEvent("btc-wagons:openWagonStash", 'Wagon_Stash_' .. wagonID, wagonModel, wagonID,
-                    wagonNetId)
-                -- Pequeno delay para evitar reativação instantânea
-                Wait(500)
-
-                -- Reativa o prompt para futuras interações
-                PromptSetEnabled(StashPrompt, true)
-                PromptSetVisible(StashPrompt, true)
-            elseif PromptHasHoldModeCompleted(DeletePrompt) then
-                -- Desativa temporariamente o prompt para evitar múltiplos acionamentos
-                PromptSetEnabled(DeletePrompt, false)
-                PromptSetVisible(DeletePrompt, false)
+                    -- Verifica e armazena o máximo de animais permitido
+                    if animalStorageCache[netId] == nil then
+                        local maxAnimal = 0
+                        for tipo, modelos in pairs(Config.Wagons) do
+                            for model, data in pairs(modelos) do
+                                if model == wagonModel then
+                                    maxAnimal = data.maxAnimals or 0
+                                    break
+                                end
+                            end
+                        end
+                        animalStorageCache[netId] = maxAnimal
+                    end
+                end
                 if isOwner then
-                    -- Se o jogador for o dono da carroça, abre o inventário
+                    local maxAnimal = animalStorageCache[wagonNetId] or 0
+                    if maxAnimal > 0 then
+                        CarcassInWagon(wagonID)
+                    else
+                        Notify(locale['no_animals_in_wagon'], 6000, 'error')
+                    end
+                else
+                    Notify(locale['no_permission'], 6000, 'error')
+                end
+            end
+        end)
+    end
+
+    function StockCarcass()
+        GetClosestWagon(function(wagon, dist, owner, id, model, netId)
+            if wagon then
+                if id then
+                    isOwner = owner
+                    wagonID = id
+                    wagonModel = model
+                    wagonNetId = netId
+
+                    -- Verifica e armazena o máximo de animais permitido
+                    if animalStorageCache[netId] == nil then
+                        local maxAnimal = 0
+                        for tipo, modelos in pairs(Config.Wagons) do
+                            for model, data in pairs(modelos) do
+                                if model == wagonModel then
+                                    maxAnimal = data.maxAnimals or 0
+                                    break
+                                end
+                            end
+                        end
+                        animalStorageCache[netId] = maxAnimal
+                    end
+                end
+                local maxAnimal = animalStorageCache[wagonNetId] or 0
+                if maxAnimal > 0 then
+                    StoreCarriedEntityInWagon()
+                else
+                    Notify(locale['no_animals_in_wagon'], 6000, 'error')
+                end
+            end
+        end)
+    end
+
+    function DeleteThisWagon()
+        GetClosestWagon(function(wagon, dist, owner, id, model, netId)
+            if wagon then
+                if id then
+                    isOwner = owner
+                    wagonID = id
+                    wagonModel = model
+                    wagonNetId = netId
+
+                    -- Verifica e armazena o máximo de animais permitido
+                    if animalStorageCache[netId] == nil then
+                        local maxAnimal = 0
+                        for tipo, modelos in pairs(Config.Wagons) do
+                            for model, data in pairs(modelos) do
+                                if model == wagonModel then
+                                    maxAnimal = data.maxAnimals or 0
+                                    break
+                                end
+                            end
+                        end
+                        animalStorageCache[netId] = maxAnimal
+                    end
+                end
+                if isOwner then
                     DeleteWagon()
                 else
-                    -- Se não for o dono, notifica que não pode acessar
-                    Notify(locale['cl_not_owner'], 6000, 'error')
+                    Notify(locale['no_permission'], 6000, 'error')
                 end
+            end
+        end)
+    end
+else
+    Citizen.CreateThread(function()
+        while true do
+            GetClosestWagon(function(wagon, dist, owner, id, model, netId)
+                if wagon then
+                    if id then
+                        isNearWagon = true
+                        isOwner = owner
+                        wagonID = id
+                        wagonModel = model
+                        wagonNetId = netId
 
-                -- Pequeno delay para evitar reativação instantânea
-                Wait(500)
+                        -- Verifica e armazena o máximo de animais permitido
+                        if animalStorageCache[netId] == nil then
+                            local maxAnimal = 0
+                            for tipo, modelos in pairs(Config.Wagons) do
+                                for model, data in pairs(modelos) do
+                                    if model == wagonModel then
+                                        maxAnimal = data.maxAnimals or 0
+                                        break
+                                    end
+                                end
+                            end
+                            animalStorageCache[netId] = maxAnimal
 
-                -- Reativa o prompt para futuras interações
-                PromptSetEnabled(DeletePrompt, true)
-                PromptSetVisible(DeletePrompt, true)
-            elseif maxAnimal > 0 then
-                PromptSetEnabled(CarcassPrompt, true)
-                PromptSetVisible(CarcassPrompt, true)
-                PromptSetEnabled(StockCarcassPrompt, true)
-                PromptSetVisible(StockCarcassPrompt, true)
-                if PromptHasHoldModeCompleted(CarcassPrompt) then
-                    PromptSetEnabled(CarcassPrompt, false)
-                    PromptSetVisible(CarcassPrompt, false)
+                            if Config.Debug then
+                                print("🐎 Máximo de animais para o modelo", model, ">", maxAnimal)
+                            end
+                        end
 
-                    CarcassInWagon(wagonID)
-                    openMenu = true
-                    Wait(1000)
+                        -- if Config.Debug then
+                        --     print("🚂 Carroça encontrada a " .. dist .. " metros! | WagonID: " .. wagonID)
+                        -- end
+                    else
+                        isNearWagon = false
+                        -- if Config.Debug then
+                        --     print("🚂 Carroça encontrada a " .. dist .. " metros! (Sem dono registrado)")
+                        -- end
+                    end
+                else
+                    isNearWagon = false
+                end
+            end)
+
+            Wait(500)
+        end
+    end)
+
+    -- set Stash prompt
+    function StashPrompt() -- Abrir o inventário da carroça
+        Citizen.CreateThread(function()
+            local str = locale['cl_wagon_stash']
+            StashPrompt = Citizen.InvokeNative(0x04F97DE45A519419)
+            PromptSetControlAction(StashPrompt, GetHashKey(Config.Keys.OpenWagonStash))
+            local str = CreateVarString(10, 'LITERAL_STRING', str)
+            PromptSetText(StashPrompt, str)
+            PromptSetEnabled(StashPrompt, true)
+            PromptSetVisible(StashPrompt, true)
+            PromptSetHoldMode(StashPrompt, true)
+            PromptSetGroup(StashPrompt, WagonGroup)
+            PromptRegisterEnd(StashPrompt)
+        end)
+    end
+
+    function DeletePrompt() -- Mandar a carroça embora
+        Citizen.CreateThread(function()
+            local str = locale['cl_flee_wagon']
+            DeletePrompt = Citizen.InvokeNative(0x04F97DE45A519419)
+            PromptSetControlAction(DeletePrompt, GetHashKey('INPUT_FRONTEND_CANCEL'))
+            local str = CreateVarString(10, 'LITERAL_STRING', str)
+            PromptSetText(DeletePrompt, str)
+            PromptSetEnabled(DeletePrompt, true)
+            PromptSetVisible(DeletePrompt, true)
+            PromptSetHoldMode(DeletePrompt, true)
+            PromptSetGroup(DeletePrompt, WagonGroup)
+            PromptRegisterEnd(DeletePrompt)
+        end)
+    end
+
+    function CarcassPrompt() -- Olhar os animais/pele na carroça
+        Citizen.CreateThread(function()
+            local str = locale['cl_see_carcass']
+            CarcassPrompt = Citizen.InvokeNative(0x04F97DE45A519419)
+            PromptSetControlAction(CarcassPrompt, GetHashKey('INPUT_INTERACT_LOCKON_ANIMAL'))
+            local str = CreateVarString(10, 'LITERAL_STRING', str)
+            PromptSetText(CarcassPrompt, str)
+            PromptSetEnabled(CarcassPrompt, true)
+            PromptSetVisible(CarcassPrompt, true)
+            PromptSetHoldMode(CarcassPrompt, true)
+            PromptSetGroup(CarcassPrompt, WagonGroup)
+            PromptRegisterEnd(CarcassPrompt)
+        end)
+    end
+
+    local StoredWagonAnimals = {} -- Armazenar os animais/pele na carroça
+    function StockCarcassPrompt() --- Armazenar os animais/pele na carroça
+        Citizen.CreateThread(function()
+            local str = locale['cl_stock_carcass']
+            StockCarcassPrompt = Citizen.InvokeNative(0x04F97DE45A519419)
+            PromptSetControlAction(StockCarcassPrompt, GetHashKey('INPUT_DOCUMENT_PAGE_PREV'))
+            local str = CreateVarString(10, 'LITERAL_STRING', str)
+            PromptSetText(StockCarcassPrompt, str)
+            PromptSetEnabled(StockCarcassPrompt, true)
+            PromptSetVisible(StockCarcassPrompt, true)
+            PromptSetHoldMode(StockCarcassPrompt, true)
+            PromptSetGroup(StockCarcassPrompt, WagonGroup)
+            PromptRegisterEnd(StockCarcassPrompt)
+        end)
+    end
+
+    -- Função para detectar a interação de mouse (botão direito)
+    Citizen.CreateThread(function()
+        StashPrompt()
+        DeletePrompt()
+        CarcassPrompt()
+        StockCarcassPrompt()
+        local ped = PlayerPedId()
+        while true do
+            local waitTime = 2000 -- Tempo padrão de espera
+            local PedInVehicle = IsPedInAnyVehicle(ped)
+            local maxAnimal = animalStorageCache[wagonNetId] or 0
+
+            if isNearWagon and not PedInVehicle and isOwner and not openMenu then
+                waitTime = 2 -- Atualiza para checagem rápida quando perto
+                local Stash = CreateVarString(10, 'LITERAL_STRING', locale['cl_your_wagon'])
+                PromptSetActiveGroupThisFrame(WagonGroup, Stash)
+
+                ----------------- Deixar os Prompts invisíveis para não aparecerem na tela até a verificação correta
+                PromptSetEnabled(CarcassPrompt, false)
+                PromptSetVisible(CarcassPrompt, false)
+                PromptSetEnabled(StockCarcassPrompt, false)
+                PromptSetVisible(StockCarcassPrompt, false)
+
+                if PromptHasHoldModeCompleted(StashPrompt) then
+                    -- Desativa temporariamente o prompt para evitar múltiplos acionamentos
+                    PromptSetEnabled(StashPrompt, false)
+                    PromptSetVisible(StashPrompt, false)
+                    TriggerServerEvent("btc-wagons:openWagonStash", 'Wagon_Stash_' .. wagonID, wagonModel, wagonID,
+                        wagonNetId)
+                    -- Pequeno delay para evitar reativação instantânea
+                    Wait(500)
+
+                    -- Reativa o prompt para futuras interações
+                    PromptSetEnabled(StashPrompt, true)
+                    PromptSetVisible(StashPrompt, true)
+                elseif PromptHasHoldModeCompleted(DeletePrompt) then
+                    -- Desativa temporariamente o prompt para evitar múltiplos acionamentos
+                    PromptSetEnabled(DeletePrompt, false)
+                    PromptSetVisible(DeletePrompt, false)
+                    if isOwner then
+                        -- Se o jogador for o dono da carroça, abre o inventário
+                        DeleteWagon()
+                    else
+                        -- Se não for o dono, notifica que não pode acessar
+                        Notify(locale['cl_not_owner'], 6000, 'error')
+                    end
+
+                    -- Pequeno delay para evitar reativação instantânea
+                    Wait(500)
+
+                    -- Reativa o prompt para futuras interações
+                    PromptSetEnabled(DeletePrompt, true)
+                    PromptSetVisible(DeletePrompt, true)
+                elseif maxAnimal > 0 then
                     PromptSetEnabled(CarcassPrompt, true)
                     PromptSetVisible(CarcassPrompt, true)
-                elseif PromptHasHoldModeCompleted(StockCarcassPrompt) then
-                    PromptSetEnabled(StockCarcassPrompt, false)
-                    PromptSetVisible(StockCarcassPrompt, false)
-
-                    StoreCarriedEntityInWagon()
-                    Wait(1000)
-
                     PromptSetEnabled(StockCarcassPrompt, true)
                     PromptSetVisible(StockCarcassPrompt, true)
+                    if PromptHasHoldModeCompleted(CarcassPrompt) then
+                        PromptSetEnabled(CarcassPrompt, false)
+                        PromptSetVisible(CarcassPrompt, false)
+
+                        CarcassInWagon(wagonID)
+                        openMenu = true
+                        Wait(1000)
+                        PromptSetEnabled(CarcassPrompt, true)
+                        PromptSetVisible(CarcassPrompt, true)
+                    elseif PromptHasHoldModeCompleted(StockCarcassPrompt) then
+                        PromptSetEnabled(StockCarcassPrompt, false)
+                        PromptSetVisible(StockCarcassPrompt, false)
+
+                        StoreCarriedEntityInWagon()
+                        Wait(1000)
+
+                        PromptSetEnabled(StockCarcassPrompt, true)
+                        PromptSetVisible(StockCarcassPrompt, true)
+                    end
                 end
-            end
-        elseif isNearWagon and not PedInVehicle and not isOwner and not openMenu then --- Aqui é a lógica de prompts para quem não é dono
-            waitTime = 2                                                       -- Atualiza para checagem rápida quando perto
-            local Stash = CreateVarString(10, 'LITERAL_STRING', locale['cl_your_wagon'])
-            PromptSetActiveGroupThisFrame(WagonGroup, Stash)
-            PromptSetEnabled(DeletePrompt, false)
-            PromptSetVisible(DeletePrompt, false)
+            elseif isNearWagon and not PedInVehicle and not isOwner and not openMenu then --- Aqui é a lógica de prompts para quem não é dono
+                waitTime = 2                                                              -- Atualiza para checagem rápida quando perto
+                local Stash = CreateVarString(10, 'LITERAL_STRING', locale['cl_your_wagon'])
+                PromptSetActiveGroupThisFrame(WagonGroup, Stash)
+                PromptSetEnabled(DeletePrompt, false)
+                PromptSetVisible(DeletePrompt, false)
 
 
-            if PromptHasHoldModeCompleted(StashPrompt) then
-                -- Desativa temporariamente o prompt para evitar múltiplos acionamentos
-                PromptSetEnabled(StashPrompt, false)
-                PromptSetVisible(StashPrompt, false)
-                -- Se o jogador for o dono da carroça, abre o inventário
-                TriggerServerEvent("btc-wagons:openWagonStash", 'Wagon_Stash_' .. wagonID, wagonModel, wagonID,
-                    wagonNetId)
+                if PromptHasHoldModeCompleted(StashPrompt) then
+                    -- Desativa temporariamente o prompt para evitar múltiplos acionamentos
+                    PromptSetEnabled(StashPrompt, false)
+                    PromptSetVisible(StashPrompt, false)
+                    -- Se o jogador for o dono da carroça, abre o inventário
+                    TriggerServerEvent("btc-wagons:openWagonStash", 'Wagon_Stash_' .. wagonID, wagonModel, wagonID,
+                        wagonNetId)
 
-                -- Pequeno delay para evitar reativação instantânea
-                Wait(500)
+                    -- Pequeno delay para evitar reativação instantânea
+                    Wait(500)
 
-                -- Reativa o prompt para futuras interações
-                PromptSetEnabled(StashPrompt, true)
-                PromptSetVisible(StashPrompt, true)
-            end
-            if maxAnimal > 0 then
-                PromptSetEnabled(StockCarcassPrompt, true)
-                PromptSetVisible(StockCarcassPrompt, true)
-                if PromptHasHoldModeCompleted(StockCarcassPrompt) then
-                    PromptSetEnabled(StockCarcassPrompt, false)
-                    PromptSetVisible(StockCarcassPrompt, false)
-
-                    StoreCarriedEntityInWagon()
-                    Wait(1000)
-
+                    -- Reativa o prompt para futuras interações
+                    PromptSetEnabled(StashPrompt, true)
+                    PromptSetVisible(StashPrompt, true)
+                end
+                if maxAnimal > 0 then
                     PromptSetEnabled(StockCarcassPrompt, true)
                     PromptSetVisible(StockCarcassPrompt, true)
+                    if PromptHasHoldModeCompleted(StockCarcassPrompt) then
+                        PromptSetEnabled(StockCarcassPrompt, false)
+                        PromptSetVisible(StockCarcassPrompt, false)
+
+                        StoreCarriedEntityInWagon()
+                        Wait(1000)
+
+                        PromptSetEnabled(StockCarcassPrompt, true)
+                        PromptSetVisible(StockCarcassPrompt, true)
+                    end
                 end
             end
+            Wait(waitTime)
         end
-        Wait(waitTime)
-    end
-end)
+    end)
+end
 ---------- Dar permissão para abri inventário
 RegisterNetEvent('btc-wagon:askOwnerPermission')
 AddEventHandler('btc-wagon:askOwnerPermission', function(data)
@@ -587,21 +782,28 @@ function DeleteWagon()
             animalStorageCache[wagonNetId] = nil
         end
         wagonVerificationCache[netId] = nil
+
+        if Config.Target then
+            exports.ox_target:removeEntity(netId, 'npc_wagonStash')
+            exports.ox_target:removeEntity(netId, 'npc_wagonShowCarcass')
+            exports.ox_target:removeEntity(netId, 'npc_wagonStockCarcass')
+            exports.ox_target:removeEntity(netId, 'npc_wagonDelete')
+        end
+
     end
 end
-
-local ControlCallWagon = false
 
 if Config.SpawnKey then
     Citizen.CreateThread(function()
         while true do
-            Citizen.Wait(10)
-            if IsControlJustReleased(0, GetHashKey(Config.SpawnKey)) and not ControlCallWagon then
-                ControlCallWagon = true
+            local sleep = 10
+            if IsControlJustReleased(0, GetHashKey(Config.SpawnKey)) then
                 CallWagon()
-                Wait(1000)
-                ControlCallWagon = false
             end
+            if mywagon and DoesEntityExist(mywagon) then
+                sleep = 1000
+            end
+            Wait(sleep)
         end
     end)
 end
@@ -617,7 +819,6 @@ function CallWagon()
     end
 
     TriggerServerEvent('btc-wagons:getWagonDataByCitizenID')
-
 end
 
 ------------------------- Função para carcaças
@@ -748,10 +949,10 @@ function StoreCarriedEntityInWagon()
             return
         end
 
-        if not isNearWagon or not isOwner or not wagonID or not wagonNetId then
-            Notify(locale["closest_to_wagon"], 5000, "error")
-            return
-        end
+        -- if not isNearWagon or not isOwner or not wagonID or not wagonNetId then
+        --     Notify(locale["closest_to_wagon"], 5000, "error")
+        --     return
+        -- end
 
         -- Verifica capacidade da carroça
         local totalStored = 0
@@ -804,7 +1005,6 @@ end
 function CarcassInWagon(wagonID)
     local carcassInWagon = {}
     TriggerServerCallback("btc-wagons:getAnimalStorage", function(menuData)
-
         if not menuData or #menuData == 0 then
             Notify(locale["wagon_no_animals"], 5000, "error")
             openMenu = false
@@ -909,5 +1109,12 @@ AddEventHandler("onResourceStop", function(resourceName)
             animalStorageCache[wagonNetId] = nil
         end
         wagonVerificationCache[netId] = nil
+
+        if Config.Target then
+            exports.ox_target:removeEntity(netId, 'npc_wagonStash')
+            exports.ox_target:removeEntity(netId, 'npc_wagonShowCarcass')
+            exports.ox_target:removeEntity(netId, 'npc_wagonStockCarcass')
+            exports.ox_target:removeEntity(netId, 'npc_wagonDelete')
+        end
     end
 end)

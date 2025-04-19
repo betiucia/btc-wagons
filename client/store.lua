@@ -1,21 +1,24 @@
 local locale = Locale[Config.Locale]
 
-CreateThread(function()
-    for k, v in pairs(Config.Stores) do
-        exports['rsg-core']:createPrompt("wagonStore" .. k, v.coords, GetHashKey(Config.Keys.OpenStore),
-            Config.Blip.blipName, {
-            type = 'client',
-            event = 'btc-wagons:client:openStore',
-            args = { k },
-        })
-        if Config.Blip.showBlip then
-            local blip = BlipAddForCoords(1664425300, v.coords)
-            SetBlipSprite(blip, -1747775003, true)
-            SetBlipScale(blip, 0.2)
-            SetBlipName(blip, Config.Blip.blipName)
+
+    CreateThread(function()
+        for k, v in pairs(Config.Stores) do
+            if Config.FrameWork == 'rsg' and not Config.Target then
+                exports['rsg-core']:createPrompt("wagonStore" .. k, v.coords, GetHashKey(Config.Keys.OpenStore),
+                    Config.Blip.blipName, {
+                        type = 'client',
+                        event = 'btc-wagons:client:openStore',
+                        args = { k },
+                    })
+                end
+            if Config.Blip.showBlip then
+                local blip = BlipAddForCoords(1664425300, v.coords)
+                SetBlipSprite(blip, -1747775003, true)
+                SetBlipScale(blip, 0.2)
+                SetBlipName(blip, Config.Blip.blipName)
+            end
         end
-    end
-end)
+    end)
 
 ------------------------ Show Room
 
@@ -55,10 +58,11 @@ function SpawnShowroomWagon(model, store)
         Wait(10)
     end
 
-    showroomWagon = CreateVehicle(model, showroomCoords.x, showroomCoords.y, showroomCoords.z, showroomCoords.w, false, false)
+    showroomWagon = CreateVehicle(model, showroomCoords.x, showroomCoords.y, showroomCoords.z, showroomCoords.w, false,
+        false)
 
-    Citizen.InvokeNative(0x75F90E4051CC084C, showroomWagon, 0) -- _REMOVE_ALL_VEHICLE_PROPSETS
-    Citizen.InvokeNative(0x8268B098F6FCA4E2, showroomWagon, 0) -- _SET_VEHICLE_TINT
+    Citizen.InvokeNative(0x75F90E4051CC084C, showroomWagon, 0)  -- _REMOVE_ALL_VEHICLE_PROPSETS
+    Citizen.InvokeNative(0x8268B098F6FCA4E2, showroomWagon, 0)  -- _SET_VEHICLE_TINT
     Citizen.InvokeNative(0xF89D82A0582E46ED, showroomWagon, -1) -- _SET_VEHICLE_LIVERY
 
     for i = 0, 10 do
@@ -90,7 +94,7 @@ function SetUpShowroomCamera(cameraPosition, targetEntity)
     -- Criando a câmera
     showroomCam = CreateCam("DEFAULT_SCRIPTED_CAMERA", true)
     SetCamCoord(showroomCam, cameraPosition.x, cameraPosition.y, cameraPosition.z) -- Distância fixa da carroça
-    PointCamAtEntity(showroomCam, targetEntity, 0, 0, 0, true)                                 -- Aponta a câmera para a carroça
+    PointCamAtEntity(showroomCam, targetEntity, 0, 0, 0, true)                     -- Aponta a câmera para a carroça
 
     SetCamActive(showroomCam, true)
     RenderScriptCams(true, false, 0, true, true)
@@ -101,7 +105,6 @@ function SetUpShowroomCamera(cameraPosition, targetEntity)
     -- Impede a movimentação da câmera
     SetEntityInvincible(showroomCam, true) -- A câmera não pode ser derrubada
 end
-
 
 local inputLeft = GetHashKey("INPUT_DIVE")
 local inputRight = GetHashKey("INPUT_LOOT_VEHICLE")
@@ -117,7 +120,7 @@ function ShowRotatePrompt()
         PromptSetText(rotateLeftPrompt, CreateVarString(10, "LITERAL_STRING", locale["left"]))
         PromptSetEnabled(rotateLeftPrompt, true)
         PromptSetVisible(rotateLeftPrompt, true)
-        PromptSetStandardMode(rotateLeftPrompt, true) -- Modo padrão de clique
+        PromptSetStandardMode(rotateLeftPrompt, true)       -- Modo padrão de clique
         PromptSetGroup(rotateLeftPrompt, rotatePromptGroup) -- Adicionar ao grupo
         PromptRegisterEnd(rotateLeftPrompt)
 
@@ -127,7 +130,7 @@ function ShowRotatePrompt()
         PromptSetText(rotateRightPrompt, CreateVarString(10, "LITERAL_STRING", locale["right"]))
         PromptSetEnabled(rotateRightPrompt, true)
         PromptSetVisible(rotateRightPrompt, true)
-        PromptSetStandardMode(rotateRightPrompt, true) -- Modo padrão de clique
+        PromptSetStandardMode(rotateRightPrompt, true)       -- Modo padrão de clique
         PromptSetGroup(rotateRightPrompt, rotatePromptGroup) -- Adicionar ao grupo
         PromptRegisterEnd(rotateRightPrompt)
 
@@ -136,6 +139,13 @@ function ShowRotatePrompt()
             while rotatePromptGroup do
                 Citizen.Wait(0)
                 PromptSetActiveGroupThisFrame(rotatePromptGroup, CreateVarString(10, "LITERAL_STRING", "Girar Carroça"))
+            end
+        end)
+        ---- Cria o loop de rotação
+        Citizen.CreateThread(function()
+            while rotatePromptGroup do
+                Citizen.Wait(0)
+                RotateShowroomWagon()
             end
         end)
     end)
@@ -158,13 +168,13 @@ end
 function RotateShowroomWagon()
     if showroomWagon then
         -- Verificar se a tecla A foi pressionada
-        if IsControlPressed(0, inputLeft) then      -- A (esquerda)
+        if IsControlPressed(0, inputLeft) then                              -- A (esquerda)
             local currentHeading = GetEntityHeading(showroomWagon)
-            SetEntityHeading(showroomWagon, currentHeading - rotationSpeed)  -- Gira para a esquerda
+            SetEntityHeading(showroomWagon, currentHeading - rotationSpeed) -- Gira para a esquerda
             -- Verificar se a tecla D foi pressionada
-        elseif IsControlPressed(0, inputRight) then -- D (direita)
+        elseif IsControlPressed(0, inputRight) then                         -- D (direita)
             local currentHeading = GetEntityHeading(showroomWagon)
-            SetEntityHeading(showroomWagon, currentHeading + rotationSpeed)  -- Gira para a direita
+            SetEntityHeading(showroomWagon, currentHeading + rotationSpeed) -- Gira para a direita
         end
     end
 end
@@ -192,17 +202,6 @@ function CloseShowroom()
     RenderScriptCams(false, false, 0, true, true)
 end
 
--- Função de atualização contínua
-CreateThread(function()
-    while true do
-        Wait(0) -- Executa a cada frame
-
-        -- Rotaciona a carroça com as teclas A e D
-        RotateShowroomWagon()
-    end
-end)
-
-
 -------------------------------------- Show your wagon
 
 -- Função para criar a carroça fantasma no showroom
@@ -222,7 +221,8 @@ function SpawnShowroomMyWagon(model, store, custom)
         Wait(10)
     end
 
-    showroomWagon = CreateVehicle(model, showroomCoords.x, showroomCoords.y, showroomCoords.z, showroomCoords.w, false, false)
+    showroomWagon = CreateVehicle(model, showroomCoords.x, showroomCoords.y, showroomCoords.z, showroomCoords.w, false,
+        false)
 
     -- Chama a função para aplicar as propriedades
     UpdateShowroomWagonVisuals(showroomWagon, custom)
@@ -244,12 +244,12 @@ function UpdateShowroomWagonVisuals(wagon, custom)
     -- Aplicando propriedades específicas
     if custom.props then
         Citizen.InvokeNative(0x75F90E4051CC084C, wagon, GetHashKey(custom.props)) -- _ADD_VEHICLE_PROPSETS
-        Citizen.InvokeNative(0x31F343383F19C987, wagon, 0.5, 1) -- _SET_VEHICLE_TARP_HEIGHT
+        Citizen.InvokeNative(0x31F343383F19C987, wagon, 0.5, 1)                   -- _SET_VEHICLE_TARP_HEIGHT
     end
 
     -- Remove as lanternas antigas corretamente
     Citizen.InvokeNative(0xE31C0CB1C3186D40, wagon) -- _REMOVE_ALL_VEHICLE_LANTERN_PROPSETS
-    Wait(50) -- Aguarde um tempo para garantir que foram removidas
+    Wait(50)                                        -- Aguarde um tempo para garantir que foram removidas
 
     -- Adiciona a nova lanterna
     if custom.lantern then
@@ -261,10 +261,10 @@ function UpdateShowroomWagonVisuals(wagon, custom)
 
     -- Força a atualização do veículo para evitar bugs visuais
     Citizen.InvokeNative(0xAD738C3085FE7E11, wagon, true, true) -- Set entity as mission entity
-    Citizen.InvokeNative(0x9617B6E5F65329A5, wagon) -- Force vehicle update
+    Citizen.InvokeNative(0x9617B6E5F65329A5, wagon)             -- Force vehicle update
 
     -- Aplicação de outros visuais
-    Citizen.InvokeNative(0x8268B098F6FCA4E2, wagon, custom.tint or 0) -- _SET_VEHICLE_TINT
+    Citizen.InvokeNative(0x8268B098F6FCA4E2, wagon, custom.tint or 0)   -- _SET_VEHICLE_TINT
     Citizen.InvokeNative(0xF89D82A0582E46ED, wagon, custom.livery or 0) -- _SET_VEHICLE_LIVERY
 
     -- Desativando extras aleatórios
@@ -288,8 +288,8 @@ function SetUpShowroomCamera(cameraPosition, targetEntity)
 
     -- Criando a câmera
     showroomCam = CreateCam("DEFAULT_SCRIPTED_CAMERA", true)
-    SetCamCoord(showroomCam, cameraPosition.x , cameraPosition.y, cameraPosition.z) -- Distância fixa da carroça
-    PointCamAtEntity(showroomCam, targetEntity, 0, 0, 0, true)                                 -- Aponta a câmera para a carroça
+    SetCamCoord(showroomCam, cameraPosition.x, cameraPosition.y, cameraPosition.z) -- Distância fixa da carroça
+    PointCamAtEntity(showroomCam, targetEntity, 0, 0, 0, true)                     -- Aponta a câmera para a carroça
 
     SetCamActive(showroomCam, true)
     RenderScriptCams(true, false, 0, true, true)
@@ -306,5 +306,4 @@ if Config.Debug then
         CloseShowroom()
         MenuData.CloseAll()
     end, false)
-
 end

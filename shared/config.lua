@@ -2,7 +2,7 @@ Config = {}
 Config.FrameWork = 'rsg'               -- Qual framework está utilizando, no caso o rsg
 Config.Locale = 'pt-br'                -- Idioma que está utilizando, no caso o português
 Config.Debug = false                    -- Ativar debug para ver os logs no console do servidor
-Config.Target = true                    -- Para usar eye Targ -- ox_target necessário
+Config.Target = true                    -- Para usar eye Target -- ox_target necessário
 
 
 ------

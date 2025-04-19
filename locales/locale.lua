@@ -69,14 +69,15 @@ Locale = {
         rob_stash_desc = 'Abrir isso aqui a força, mesmo que tenha consequencias!',
         stash_menu = 'Inventário',
         stash_menu_desc = 'Vai pedir permissão ou roubar?',
-        no_permission = 'O dono não te deu permissão',
+        no_permission = 'Você não tem permissão para isso',
         have_permission = 'Agora você tem permissão para abrir o inventário da carroça',
         alert = 'Alerta!',
         player_stash = 'A pessoa ',
         player_stash_02 =' pediu permissão para abrir o inventário da carroça, permitir?',
         no_have_item = 'Você não possui ',
         fail_lockpick = 'Você falhou',
-        wagon_no_animals = 'Não há animais/peles na carroça'
+        wagon_no_animals = 'Não há animais/peles na carroça',
+        no_animals_in_wagon = 'Esta carroça não estoca animais'
     },
 
     ["en"] =
@@ -153,7 +154,8 @@ Locale = {
         player_stash_02 = " requested permission to access the wagon inventory. Allow?",
         no_have_item = "You don't have ",
         fail_lockpick = "You failed",
-        wagon_no_animals = 'There are no animals/pelts in the wagon'
+        wagon_no_animals = 'There are no animals/pelts in the wagon',
+        no_animals_in_wagon = "This wagon does not store animals."
     },
 
 }

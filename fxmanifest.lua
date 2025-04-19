@@ -3,7 +3,7 @@ rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aw
 game 'rdr3'
 
 description 'btc-wagons'
-version '1.0.2'
+version '1.0.3'
 author 'Betiucia'
 
 shared_scripts {
@@ -21,12 +21,14 @@ server_scripts {
     'server/*.lua',
 }
 
-ui_page('html/index.html')
-
 dependencies {
     'ox_lib',
-    'redemrp_menu_base',
+    'btc-redemrp_menu_base',
     'lockpick'
+}
+
+files {
+	'images/*.png',
 }
 
 lua54 'yes'
