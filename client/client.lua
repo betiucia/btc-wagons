@@ -15,6 +15,7 @@ local WagonGroup = GetRandomIntInRange(0, 0xffffff)
 local locale = Locale[Config.Locale]
 local openMenu = false
 local cargo = false
+local firstcall = true
 
 -- If you wish to trigger the action from another script, use:
 RegisterNetEvent('btc-wagons:client:dellwagon')
@@ -191,63 +192,74 @@ local function SpawnWagon(model, tint, livery, props, extra, lantern, myWagonID)
 end
 
 function CreateWagonTarget()
+    local networkId = NetworkGetNetworkIdFromEntity(mywagon)
 
-        local networkId = NetworkGetNetworkIdFromEntity(mywagon)
-
-        while not NetworkDoesEntityExistWithNetworkId(networkId) do
-            Wait(50) -- Aguarda até que a carroça esteja completamente registrada na rede
-        end
-        if networkId then
-        exports.ox_target:addEntity(networkId, {
-            {
-                name = 'npc_wagonStash',
-                icon = 'fa-solid fa-box-open',
-                label = locale['cl_wagon_stash'],
-                onSelect = function()
-                    StashWagon()
-                end,
-                distance = 1.5
-            }
-        })
-        Wait(100)
-        exports.ox_target:addEntity(networkId, {
-            {
-                name = 'npc_wagonShowCarcass',
-                icon = 'fa-solid fa-boxes-stacked',
-                label = locale['cl_see_carcass'],
-                onSelect = function()
-                    ShowCarcass()
-                end,
-                distance = 1.5
-            }
-        })
-        Wait(100)
-        exports.ox_target:addEntity(networkId, {
-            {
-                name = 'npc_wagonStockCarcass',
-                icon = 'fa-solid fa-paw',
-                label = locale['cl_stock_carcass'],
-                onSelect = function()
-                    StockCarcass()
-                end,
-                distance = 1.5
-            }
-        })
-        Wait(100)
-        exports.ox_target:addEntity(networkId, {
-            {
-                name = 'npc_wagonDelete',
-                icon = 'fa-solid fa-warehouse',
-                label = locale['cl_flee_wagon'],
-                onSelect = function()
-                    DeleteThisWagon()
-                end,
-                distance = 1.5
-            }
-        })
-    else
-        CreateWagonTarget()
+    while not NetworkDoesEntityExistWithNetworkId(networkId) do
+        Wait(50)     -- Aguarda até que a carroça esteja completamente registrada na rede
     end
+
+    if firstcall then
+        firstcall = false
+        DeleteWagon()
+        Wait(200)
+        CallWagon()
+    else
+        if networkId then
+            exports.ox_target:addEntity(networkId, {
+                {
+                    name = 'npc_wagonStash',
+                    icon = 'fa-solid fa-box-open',
+                    label = locale['cl_wagon_stash'],
+                    onSelect = function()
+                        StashWagon()
+                    end,
+                    distance = 1.5
+                }
+            })
+            Wait(100)
+            exports.ox_target:addEntity(networkId, {
+                {
+                    name = 'npc_wagonShowCarcass',
+                    icon = 'fa-solid fa-boxes-stacked',
+                    label = locale['cl_see_carcass'],
+                    onSelect = function()
+                        ShowCarcass()
+                    end,
+                    distance = 1.5
+                }
+            })
+            Wait(100)
+            exports.ox_target:addEntity(networkId, {
+                {
+                    name = 'npc_wagonStockCarcass',
+                    icon = 'fa-solid fa-paw',
+                    label = locale['cl_stock_carcass'],
+                    onSelect = function()
+                        StockCarcass()
+                    end,
+                    distance = 1.5
+                }
+            })
+            Wait(100)
+            exports.ox_target:addEntity(networkId, {
+                {
+                    name = 'npc_wagonDelete',
+                    icon = 'fa-solid fa-warehouse',
+                    label = locale['cl_flee_wagon'],
+                    onSelect = function()
+                        DeleteThisWagon()
+                    end,
+                    distance = 1.5
+                }
+            })
+        else
+            DeleteWagon()
+            Wait(100)
+            CallWagon()
+        end
+    end
+
+
 end
 
 --- Controlar a Entidade
@@ -793,7 +805,6 @@ function DeleteWagon()
             exports.ox_target:removeEntity(netId, 'npc_wagonStockCarcass')
             exports.ox_target:removeEntity(netId, 'npc_wagonDelete')
         end
-
     end
 end
 
