@@ -1,28 +1,5 @@
 local locale = Locale[Config.Locale]
 
-if Config.FrameWork == 'rsg' then
-    RSGCore = exports['rsg-core']:GetCoreObject() -- Puxando o core do RSG
-end
-
-local wagons = {} -- Tabela para armazenar as carroças e seus donos
-
---- Função que cria Callbacks
-local Callbacks = {}
-
-RegisterNetEvent("btc-wagons:triggerCallback")
-AddEventHandler("btc-wagons:triggerCallback", function(name, requestId, ...)
-    local source = source
-    if Callbacks[name] then
-        Callbacks[name](source, function(...)
-            TriggerClientEvent("btc-wagons:callbackResponse", source, requestId, ...)
-        end, ...)
-    end
-end)
-
-function RegisterServerCallback(name, cb)
-    Callbacks[name] = cb
-end
-
 ------------------ save wagon -------------------
 
 RegisterServerEvent("btc-wagons:saveWagonToDatabase")
