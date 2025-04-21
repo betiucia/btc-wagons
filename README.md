@@ -31,7 +31,6 @@ Features:
 
 In development:
 - Transfer wagon to another player
-- More stables
 - Compatibility with more frameworks (but RSG will always be the main one)
 
 Special thanks to MasNana for sharing the mas_huntingwagon code with the community — I was able to learn a lot and enhance this script with that knowledge!
@@ -69,7 +68,6 @@ Possui:
 
 Em desenvolvimento:
 - Transferencia de carroça para outro player
-- Mais estábulos
 - Compatibilidade com mais frameworks (Mas RSG sempre será a principal)
 
 Agradecimento ao MasNana que compartilhou o código de mas_huntingwagon com a comunidade e eu pude aprender muitas coisas para complementar este script!

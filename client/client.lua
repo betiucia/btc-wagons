@@ -15,7 +15,6 @@ local WagonGroup = GetRandomIntInRange(0, 0xffffff)
 local locale = Locale[Config.Locale]
 local openMenu = false
 local cargo = false
-local firstcall = true
 
 -- If you wish to trigger the action from another script, use:
 RegisterNetEvent('btc-wagons:client:dellwagon')
@@ -178,7 +177,8 @@ local function SpawnWagon(model, tint, livery, props, extra, lantern, myWagonID)
     getControlOfEntity(mywagon)
 
     if Config.Target then
-        CreateWagonTarget(mywagon)
+        Wait(100)
+        CreateWagonTarget(networkId)
     end
 
     TriggerServerEvent("btc-wagons:registerWagon", networkId, myWagonID, model) -- Envia o evento para o servidor com o ID da rede
@@ -191,19 +191,9 @@ local function SpawnWagon(model, tint, livery, props, extra, lantern, myWagonID)
     Citizen.InvokeNative(0x9CB1A1623062F402, wagonBlip, locale['cl_your_wagon'])
 end
 
-function CreateWagonTarget()
-    local networkId = NetworkGetNetworkIdFromEntity(mywagon)
-
-    while not NetworkDoesEntityExistWithNetworkId(networkId) do
-        Wait(50)     -- Aguarda até que a carroça esteja completamente registrada na rede
-    end
-
-    if firstcall then
-        firstcall = false
-        DeleteWagon()
-        Wait(200)
-        CallWagon()
-    else
+function CreateWagonTarget(netId)
+    local networkId = netId
+    Wait(100)
         if networkId then
             exports.ox_target:addEntity(networkId, {
                 {
@@ -252,12 +242,8 @@ function CreateWagonTarget()
                     distance = 1.5
                 }
             })
-        else
-            DeleteWagon()
-            Wait(100)
-            CallWagon()
         end
-    end
+    -- end
 
 
 end
