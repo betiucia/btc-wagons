@@ -30,7 +30,7 @@ AddEventHandler('btc-wagons:client:openStore', function(store)
         {
             title = locale["cl_wagon_store"],
             subtext = locale["cl_wagon_store_desc"],
-            align = 'top-left',
+            align = Config.PositionMenu,
             elements = menuData
         },
         function(data, menu)
@@ -59,7 +59,7 @@ for type, wagons in pairs(Config.Wagons) do
     table.insert(wagonsTypeData, {
         label = locale[type],
         value = type,
-        image = "nui://btc-wagons/images/"..type..'.png',
+        image = "nui://btc-wagons/images/" .. type .. '.png',
         desc = "Escolha o modelo de carroça",
     })
 end
@@ -79,7 +79,7 @@ function BuyTypeWagonMenu(store)
         {
             title = locale["cl_wagon_store"],
             subtext = locale["cl_wagon_store_desc"],
-            align = 'top-left',
+            align = Config.PositionMenu,
             elements = wagonsTypeData
         },
         function(data, menu)
@@ -109,6 +109,9 @@ function BuyWagonMenu(store, wagonType)
                     name = v.name,
                     price = v.price,
                     priceGold = v.priceGold, -- Adiciona preço em ouro
+                    maxAnimals = v.maxAnimals,
+                    slots = v.slots,
+                    maxWeight = v.maxWeight,
                     model = k
                 })
             end
@@ -137,6 +140,22 @@ function BuyWagonMenu(store, wagonType)
             priceText = priceText .. ' 🪙' .. v.priceGold --
             useGold = true
         end
+        if v.maxAnimals then
+            priceText = priceText .. " <br> 🦌 " .. locale["animals"] .. ' ' .. v.maxAnimals .. ' '
+        end
+
+        if v.slots and not v.maxWeight then
+            priceText = priceText .. " <br> " .. locale["slots"] .. ': ' .. v.slots .. ' '
+        end
+
+        if not v.slots and v.maxWeight then
+            priceText = priceText .. " <br> " .. locale["weight"] .. ': ' .. v.maxWeight .. ' kg'
+        end
+
+        if v.slots and v.maxWeight then
+            priceText = priceText ..
+            " <br> " .. locale["slots"] .. ': ' .. v.slots .. ' ' .. locale["weight"] .. ': ' .. v.maxWeight .. ' kg'
+        end
 
         table.insert(wagonsData, {
             label = v.name,
@@ -156,7 +175,7 @@ function BuyWagonMenu(store, wagonType)
         {
             title = locale["cl_wagon_store"],
             subtext = locale["cl_wagon_store_desc"],
-            align = 'top-left',
+            align = Config.PositionMenu,
             elements = wagonsData
         },
         function(data, menu)
@@ -257,7 +276,7 @@ function MyWagons(store)
                 {
                     title = locale["cl_your_wagons"],
                     subtext = locale["cl_your_wagons_desc"],
-                    align = 'top-left',
+                    align = Config.PositionMenu,
                     elements = myWagonsData
                 },
                 function(data, menu)
@@ -297,7 +316,7 @@ function SelectMyWagon(store, custom, wagonModel)
                 table.insert(myWagonCustomData, {
                     label = locale[type] .. " - $" .. Config.CustomPrice[type],
                     value = type,
-                    image = "nui://btc-wagons/images/wagons_"..type..'.png',
+                    image = "nui://btc-wagons/images/wagons_" .. type .. '.png',
                     custom = currentWagonCustom[type] or {},
                     desc = locale[type .. "_desc"] or "Sem descrição",
                 })
@@ -326,7 +345,7 @@ function SelectMyWagon(store, custom, wagonModel)
         {
             title = locale["cl_your_wagons"] or "Suas Carroças",
             subtext = locale["cl_your_wagons_desc"] or "Edite sua carroça",
-            align = 'top-left',
+            align = Config.PositionMenu,
             elements = myWagonCustomData
         },
         function(data, menu)
@@ -422,7 +441,7 @@ function EditLivery(store, custom, wagonModel, type)
         {
             title = locale["cl_your_wagons"] or "Suas Carroças",
             subtext = locale["cl_your_wagons_desc"] or "Edite sua carroça",
-            align = 'top-left',
+            align = Config.PositionMenu,
             elements = myLiveryCustom
         },
         function(data, menu)
@@ -491,7 +510,7 @@ function EditExtra(store, custom, wagonModel, type)
         {
             title = locale["cl_your_wagons"] or "Suas Carroças",
             subtext = locale["cl_your_wagons_desc"] or "Edite sua carroça",
-            align = 'top-left',
+            align = Config.PositionMenu,
             elements = myExtraCustom
         },
         function(data, menu)
@@ -560,7 +579,7 @@ function EditLantern(store, custom, wagonModel, type)
         {
             title = locale["cl_your_wagons"] or "Suas Carroças",
             subtext = locale["cl_your_wagons_desc"] or "Edite sua carroça",
-            align = 'top-left',
+            align = Config.PositionMenu,
             elements = myLanternCustom
         },
         function(data, menu)
@@ -638,7 +657,7 @@ function EditWagonProps(store, custom, wagonModel, type)
         {
             title = locale["cl_your_wagons"] or "Suas Carroças",
             subtext = locale["cl_your_wagons_desc"] or "Edite sua carroça",
-            align = 'top-left',
+            align = Config.PositionMenu,
             elements = myPropsCustom
         },
         function(data, menu)
@@ -705,7 +724,7 @@ function EditWagonTint(store, custom, wagonModel, type)
         {
             title = locale["cl_your_wagons"] or "Suas Carroças",
             subtext = locale["cl_your_wagons_desc"] or "Edite sua carroça",
-            align = 'top-left',
+            align = Config.PositionMenu,
             elements = myTintCustom
         },
         function(data, menu)
@@ -762,7 +781,7 @@ AddEventHandler('btc-wagons:stashPermission', function(info)
         {
             title = locale["stash_menu"],
             subtext = locale["stash_menu_desc"],
-            align = 'top-left',
+            align = Config.PositionMenu,
             elements = menuData
         },
         function(data, menu)

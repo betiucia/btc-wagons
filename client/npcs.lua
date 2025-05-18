@@ -33,7 +33,7 @@ function NearPed(npcmodel, npccoords, stableid)
     while not HasModelLoaded(npcmodel) do
         Wait(50)
     end
-    local spawnedPed = CreatePed(npcmodel, npccoords.x, npccoords.y, npccoords.z - 1.0, heading, false, false, 0, 0)
+    local spawnedPed = CreatePed(npcmodel, npccoords.x, npccoords.y, npccoords.z - 1.0, npccoords.w, false, false, 0, 0)
     SetEntityAlpha(spawnedPed, 0, false)
     SetRandomOutfitVariation(spawnedPed, true)
     SetEntityCanBeDamaged(spawnedPed, false)

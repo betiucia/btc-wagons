@@ -1,12 +1,13 @@
 Config = {}
-Config.FrameWork = 'rsg'               -- Qual framework está utilizando, no caso o rsg
-Config.Locale = 'pt-br'                -- Idioma que está utilizando, no caso o português
-Config.Debug = false                    -- Ativar debug para ver os logs no console do servidor
-Config.Target = true                    -- Para usar eye Target -- ox_target necessário
+Config.FrameWork = 'rsg' -- Qual framework está utilizando, no caso o rsg
+Config.Locale = 'pt-br'  -- Idioma que está utilizando, no caso o português
+Config.Debug = false     -- Ativar debug para ver os logs no console do servidor
+Config.Target = false    -- Para usar eye Target -- ox_target necessário
+Config.PositionMenu = 'top-right'
 
 
 ------
-Config.SpawnKey = "INPUT_OPEN_JOURNAL" -- Tecla para abrir chamar a carroça, para desativar utilize false
+Config.SpawnKey = "INPUT_OPEN_JOURNAL" -- Tecla para chamar a carroça, para desativar utilize false
 -- Caso queira utilizar uma chamda externa (Por exemplo rsg-radialmenu) utilize:
 -- Call: TriggerEvent('btc-wagons:client:callwagon')
 -- Delete: TriggerEvent('btc-wagons:client:dellwagon')
@@ -25,7 +26,7 @@ Config.Robbery = {
 }
 
 Config.maxWagonsPerPlayer = 5
-Config.Sell = 0.1               -- Porcentagem do valor que será devolvido ao vender a carroça, no caso 0.1 = 10% do valor total
+Config.Sell = 0.1 -- Porcentagem do valor que será devolvido ao vender a carroça, no caso 0.1 = 10% do valor total
 
 Config.Keys = {
     OpenWagonStash = "INPUT_CREATOR_ACCEPT",      -- Tecla para abrir o inventário da carroça
@@ -44,35 +45,35 @@ Config.Blip = {
 Config.Stores = {
     Valentine = {
         coords = vector3(-355.11, 775.18, 116.22),            -- Coordenadas do local onde o menu será aberto
-        npcmodel = `u_m_m_bwmstablehand_01`,                    -- Modelo do NPC que abrirá o menu
+        npcmodel = `s_m_m_cghworker_01`,                      -- Modelo do NPC que abrirá o menu
         npccoords = vector4(-355.11, 775.18, 116.22, 321.41), -- Coordenadas do NPC que abrirá o menu
         previewWagon = vec4(-371.76, 786.87, 115.16, 272.08), -- Local Para visualizar a carroça
-        cameraPreviewWagon = vec4(-371.76 + 8 , 786.87, 115.16 + 2 , 272.08),
+        cameraPreviewWagon = vec4(-371.76 + 8, 786.87, 115.16 + 2, 272.08),
     },
     SaintDenis = {
-        coords = vector3(2506.02, -1459.52, 46.37),            -- Coordenadas do local onde o menu será aberto
-        npcmodel = `u_m_m_bwmstablehand_01`,                    -- Modelo do NPC que abrirá o menu
-        npccoords = vector4(2506.02, -1459.52, 46.37, 66.78), -- Coordenadas do NPC que abrirá o menu
+        coords = vector3(2506.02, -1459.52, 46.37),                -- Coordenadas do local onde o menu será aberto
+        npcmodel = `s_m_m_cghworker_01`,                           -- Modelo do NPC que abrirá o menu
+        npccoords = vector4(2506.02, -1459.52, 46.37, 66.78),      -- Coordenadas do NPC que abrirá o menu
         previewWagon = vec4(2502.689, -1441.257, 45.313, 177.895), -- Local Para visualizar a carroça
         cameraPreviewWagon = vec4(2502.689, -1441.257 - 8, 45.313 + 3, 177.895),
     },
     Strawberry = {
-        coords = vector3(-1817.261, -559.600, 156.177),            -- Coordenadas do local onde o menu será aberto
-        npcmodel = `u_m_m_bwmstablehand_01`,                    -- Modelo do NPC que abrirá o menu
-        npccoords = vector4(-1817.261, -559.600, 156.177, 164.684), -- Coordenadas do NPC que abrirá o menu
+        coords = vector3(-1811.18, -555.63, 155.98),                -- Coordenadas do local onde o menu será aberto
+        npcmodel = `s_m_m_cghworker_01`,                            -- Modelo do NPC que abrirá o menu
+        npccoords = vec4(-1811.18, -555.63, 155.98, 265.87),        -- Coordenadas do NPC que abrirá o menu
         previewWagon = vec4(-1821.550, -561.547, 155.060, 253.239), -- Local Para visualizar a carroça
-        cameraPreviewWagon = vec4(-1821.550 + 6, -561.547, 155.060 + 2 , 253.239),
+        cameraPreviewWagon = vec4(-1821.550 + 6, -561.547, 155.060 + 2, 253.239),
     },
     BlackWater = {
-        coords = vector3(-878.606, -1368.115, 43.527),            -- Coordenadas do local onde o menu será aberto
-        npcmodel = `u_m_m_bwmstablehand_01`,                    -- Modelo do NPC que abrirá o menu
-        npccoords = vector4(-878.606, -1368.115, 43.527, 276.638), -- Coordenadas do NPC que abrirá o menu
-        previewWagon = vec4(-865.77, -1366.23, 43.49, 88.50), -- Local Para visualizar a carroça
+        coords = vector3(-870.62, -1370.70, 43.62),             -- Coordenadas do local onde o menu será aberto
+        npcmodel = `s_m_m_cghworker_01`,                           -- Modelo do NPC que abrirá o menu
+        npccoords = vector4(-870.62, -1370.70, 43.62, 40.36), -- Coordenadas do NPC que abrirá o menu
+        previewWagon = vec4(-865.77, -1366.23, 43.49, 88.50),      -- Local Para visualizar a carroça
         cameraPreviewWagon = vec4(-865.77 - 8, -1366.23, 43.49 + 2, 88.50),
     },
     Tumbleweed = {
-        coords = vector3(-5515.295, -3039.497, -2.388),            -- Coordenadas do local onde o menu será aberto
-        npcmodel = `u_m_m_bwmstablehand_01`,                    -- Modelo do NPC que abrirá o menu
+        coords = vector3(-5515.295, -3039.497, -2.388),             -- Coordenadas do local onde o menu será aberto
+        npcmodel = `s_m_m_cghworker_01`,                            -- Modelo do NPC que abrirá o menu
         npccoords = vector4(-5515.295, -3039.497, -2.388, 182.161), -- Coordenadas do NPC que abrirá o menu
         previewWagon = vec4(-5522.063, -3044.438, -3.388, 265.561), -- Local Para visualizar a carroça
         cameraPreviewWagon = vec4(-5522.063 + 8, -3044.438, -3.388 + 2, 265.561),
@@ -82,402 +83,402 @@ Config.Stores = {
 
 Config.Wagons = {
     work = {
-        wagon02x = {                            -- Hash modelo da carroça
-            name = "Carroça de Acampamento 02", -- Nome que será exibido no menu de compra
-            maxWeight = 100,                    -- Peso máximo que a carroça pode carregar
-            slots = 20,                         -- Número de slots disponíveis na carroça
-            price = 25,                         -- Preço da carroça
-            priceGold = 1,                      -- Preço da carroça em gold
-            maxAnimals = 10,                    -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        wagon02x = {
+            name = "Carroça de Acampamento Padrão", -- Anterior: Carroça de Acampamento 02
+            maxWeight = 560,                        -- Peso máximo (ex: ~1250 lbs / 560 kg)
+            slots = 50,                             -- Número de slots disponíveis
+            price = 40,                             -- Preço em dólares da época
+            priceGold = 2,                          -- Preço em gold (premium)
+            maxAnimals = 5,                         -- Pequenos animais/peles
         },
-        wagon03x = {                            -- Hash modelo da carroça
-            name = "Carroça de Acampamento 03", -- Nome que será exibido no menu de compra
-            maxWeight = 100,                    -- Peso máximo que a carroça pode carregar
-            slots = 20,                         -- Número de slots disponíveis na carroça
-            price = 25,                         -- Preço da carroça
-            priceGold = 1,                      -- Preço da carroça em gold
-            maxAnimals = 10,                    -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        wagon03x = {
+            name = "Carroça de Acampamento Reforçada", -- Anterior: Carroça de Acampamento 03
+            maxWeight = 600,                           -- (ex: ~1500 lbs / 680 kg)
+            slots = 60,
+            price = 50,
+            priceGold = 2,
+            maxAnimals = 6, -- Pequenos animais/peles
         },
-        wagon04x = {                            -- Hash modelo da carroça
-            name = "Carroça de Acampamento 04", -- Nome que será exibido no menu de compra
-            maxWeight = 100,                    -- Peso máximo que a carroça pode carregar
-            slots = 20,                         -- Número de slots disponíveis na carroça
-            price = 25,                         -- Preço da carroça
-            priceGold = 1,                      -- Preço da carroça em gold
-            maxAnimals = 10,                    -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        wagon04x = {
+            name = "Carroça de Fazenda Leve", -- Anterior: Carroça de Acampamento 04
+            maxWeight = 500,                  -- (ex: ~1100 lbs / 500 kg)
+            slots = 45,
+            price = 35,
+            priceGold = 2,
+            maxAnimals = 4, -- Pequenos animais/peles
         },
-        wagon05x = {                            -- Hash modelo da carroça
-            name = "Carroça de Acampamento 05", -- Nome que será exibido no menu de compra
-            maxWeight = 100,                    -- Peso máximo que a carroça pode carregar
-            slots = 20,                         -- Número de slots disponíveis na carroça
-            price = 25,                         -- Preço da carroça
-            priceGold = 1,                      -- Preço da carroça em gold
-            maxAnimals = 10,                    -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        wagon05x = {
+            name = "Carroça Utilitária Aberta", -- Anterior: Carroça de Acampamento 05
+            maxWeight = 635,                    -- (ex: ~1400 lbs / 635 kg)
+            slots = 55,
+            price = 45,
+            priceGold = 2,
+            maxAnimals = 5, -- Pequenos animais/peles
         },
-        wagon06x = {                            -- Hash modelo da carroça
-            name = "Carroça de Acampamento 06", -- Nome que será exibido no menu de compra
-            maxWeight = 100,                    -- Peso máximo que a carroça pode carregar
-            slots = 20,                         -- Número de slots disponíveis na carroça
-            price = 25,                         -- Preço da carroça
-            priceGold = 1,                      -- Preço da carroça em gold
-            maxAnimals = 10,                    -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        wagon06x = {
+            name = "Carroça de Suprimentos Coberta", -- Anterior: Carroça de Acampamento 06
+            maxWeight = 725,                         -- (ex: ~1600 lbs / 725 kg)
+            slots = 65,
+            price = 55,
+            priceGold = 3,
+            maxAnimals = 2, -- Aves em gaiolas ou itens pequenos
         },
-        cart01 = {                              -- Hash modelo da carroça
-            name = "Carroça de Camponês 01",
-            maxWeight = 100,                    -- Peso máximo que a carroça pode carregar
-            slots = 20,                         -- Número de slots disponíveis na carroça
-            price = 25,                         -- Preço da carroça
-            priceGold = 18,                     -- Preço da carroça em gold
-            maxAnimals = false,                 -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        cart01 = {
+            name = "Carroça de Camponês Leve", -- Anterior: Carroça de Camponês 01
+            maxWeight = 400,                   -- (ex: ~900 lbs / 400 kg)
+            slots = 35,
+            price = 25,
+            priceGold = 1, -- Ajustado de 18
+            maxAnimals = false,
         },
-        cart02 = {                              -- Hash modelo da carroça
-            name = "Carroça de Camponês 02",
-            maxWeight = 100,                    -- Peso máximo que a carroça pode carregar
-            slots = 20,                         -- Número de slots disponíveis na carroça
-            price = 25,                         -- Preço da carroça
-            priceGold = 18,                     -- Preço da carroça em gold
-            maxAnimals = false,                 -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        cart02 = {
+            name = "Carroça de Camponês com Laterais", -- Anterior: Carroça de Camponês 02
+            maxWeight = 450,                           -- (ex: ~1000 lbs / 450 kg)
+            slots = 40,
+            price = 30,
+            priceGold = 1, -- Ajustado de 18
+            maxAnimals = false,
         },
-        cart03 = {                              -- Hash modelo da carroça
-            name = "Carroça de Camponês 03",
-            maxWeight = 100,                    -- Peso máximo que a carroça pode carregar
-            slots = 20,                         -- Número de slots disponíveis na carroça
-            price = 25,                         -- Preço da carroça
-            priceGold = 18,                     -- Preço da carroça em gold
-            maxAnimals = false,                 -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        cart03 = {
+            name = "Carroça de Mercado Pequena", -- Anterior: Carroça de Camponês 03
+            maxWeight = 360,                     -- (ex: ~800 lbs / 360 kg)
+            slots = 30,
+            price = 22,
+            priceGold = 1, -- Ajustado de 18
+            maxAnimals = false,
         },
-        cart04 = {                              -- Hash modelo da carroça
-            name = "Carroça de Camponês 04",
-            maxWeight = 100,                    -- Peso máximo que a carroça pode carregar
-            slots = 20,                         -- Número de slots disponíveis na carroça
-            price = 25,                         -- Preço da carroça
-            priceGold = 18,                     -- Preço da carroça em gold
-            maxAnimals = false,                 -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        cart04 = {
+            name = "Carroça de Fazenda Compacta", -- Anterior: Carroça de Camponês 04
+            maxWeight = 430,                      -- (ex: ~950 lbs / 430 kg)
+            slots = 38,
+            price = 28,
+            priceGold = 6, -- Ajustado de 18
+            maxAnimals = false,
         },
-        cart05 = {                              -- Hash modelo da carroça
-            name = "Transporte de Liquidos",
-            maxWeight = 100,                    -- Peso máximo que a carroça pode carregar
-            slots = 20,                         -- Número de slots disponíveis na carroça
-            price = 25,                         -- Preço da carroça
-            priceGold = 18,                     -- Preço da carroça em gold
-            maxAnimals = false,                 -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        cart05 = {
+            name = "Carroça-Tanque de Água/Líquidos", -- Anterior: Transporte de Liquidos
+            maxWeight = 900,                          -- (ex: ~2000 lbs / 900 kg - líquidos são pesados)
+            slots = 10,                               -- Representa grandes recipientes/tanque
+            price = 70,                               -- Especializada
+            priceGold = 3,                            -- Ajustado de 18
+            maxAnimals = false,
         },
-        cart06 = {                              -- Hash modelo da carroça
-            name = "Carroça de Carga 01",
-            maxWeight = 100,                    -- Peso máximo que a carroça pode carregar
-            slots = 20,                         -- Número de slots disponíveis na carroça
-            price = 25,                         -- Preço da carroça
-            priceGold = 18,                     -- Preço da carroça em gold
-            maxAnimals = false,                 -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        cart06 = {
+            name = "Carroça de Carga Geral", -- Anterior: Carroça de Carga 01
+            maxWeight = 790,                 -- (ex: ~1750 lbs / 790 kg)
+            slots = 70,
+            price = 60,
+            priceGold = 3, -- Ajustado de 18
+            maxAnimals = false,
         },
-        cart07 = {                              -- Hash modelo da carroça
-            name = "Carroça de Camponês 05",
-            maxWeight = 100,                    -- Peso máximo que a carroça pode carregar
-            slots = 20,                         -- Número de slots disponíveis na carroça
-            price = 25,                         -- Preço da carroça
-            priceGold = 18,                     -- Preço da carroça em gold
-            maxAnimals = false,                 -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        cart07 = {
+            name = "Carroça de Agricultor", -- Anterior: Carroça de Camponês 05
+            maxWeight = 475,                -- (ex: ~1050 lbs / 475 kg)
+            slots = 42,
+            price = 32,
+            priceGold = 2, -- Ajustado de 18
+            maxAnimals = false,
         },
-        cart08 = {                              -- Hash modelo da carroça
-            name = "Carroça de Camponês 06",
-            maxWeight = 100,                    -- Peso máximo que a carroça pode carregar
-            slots = 20,                         -- Número de slots disponíveis na carroça
-            price = 25,                         -- Preço da carroça
-            priceGold = 18,                     -- Preço da carroça em gold
-            maxAnimals = false,                 -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        cart08 = {
+            name = "Carroça Utilitária Rural", -- Anterior: Carroça de Camponês 06
+            maxWeight = 520,                   -- (ex: ~1150 lbs / 520 kg)
+            slots = 46,
+            price = 38,
+            priceGold = 2, -- Ajustado de 18
+            maxAnimals = false,
         },
-        chuckwagon000x = {                      -- Hash modelo da carroça
-            name = "Carroça de Acampamento 01",
-            maxWeight = 100,                    -- Peso máximo que a carroça pode carregar
-            slots = 20,                         -- Número de slots disponíveis na carroça
-            price = 25,                         -- Preço da carroça
-            priceGold = 18,                     -- Preço da carroça em gold
-            maxAnimals = false,                 -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        chuckwagon000x = {
+            name = "Carroça de Cozinha (Chuckwagon)", -- Anterior: Carroça de Acampamento 01
+            maxWeight = 860,                          -- (ex: ~1900 lbs / 860 kg) Chuckwagons carregavam muito
+            slots = 75,                               -- Para comida, utensílios, etc.
+            price = 80,                               -- Chuckwagons eram substanciais
+            priceGold = 3,                            -- Ajustado de 18
+            maxAnimals = false,                       -- Primariamente para suprimentos
         },
-        chuckwagon002x = {                      -- Hash modelo da carroça
-            name = "Carroça de Carga 02",
-            maxWeight = 100,                    -- Peso máximo que a carroça pode carregar
-            slots = 20,                         -- Número de slots disponíveis na carroça
-            price = 25,                         -- Preço da carroça
-            priceGold = 18,                     -- Preço da carroça em gold
-            maxAnimals = false,                 -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        chuckwagon002x = {
+            name = "Carroça de Carga de Ferramentas", -- Anterior: Carroça de Carga 02
+            maxWeight = 815,                          -- (ex: ~1800 lbs / 815 kg)
+            slots = 70,
+            price = 65,
+            priceGold = 3, -- Ajustado de 18
+            maxAnimals = false,
         },
-        coal_wagon = {                          -- Hash modelo da carroça
-            name = "Transporte de Carvão",
-            maxWeight = 100,                    -- Peso máximo que a carroça pode carregar
-            slots = 20,                         -- Número de slots disponíveis na carroça
-            price = 25,                         -- Preço da carroça
-            priceGold = 18,                     -- Preço da carroça em gold
-            maxAnimals = false,                 -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        coal_wagon = {
+            name = "Vagão de Carvão/Minério", -- Anterior: Transporte de Carvão
+            maxWeight = 1360,                 -- (ex: ~3000 lbs / 1360 kg) Para carga pesada e a granel
+            slots = 30,                       -- Menos slots, para itens a granel
+            price = 100,
+            priceGold = 4,                    -- Ajustado de 18
+            maxAnimals = false,
         },
-        gatchuck = {                            -- Hash modelo da carroça
-            name = "Carroça de Carga 03",
-            maxWeight = 100,                    -- Peso máximo que a carroça pode carregar
-            slots = 20,                         -- Número de slots disponíveis na carroça
-            price = 25,                         -- Preço da carroça
-            priceGold = 18,                     -- Preço da carroça em gold
-            maxAnimals = false,                 -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        gatchuck = {                                     -- Hash pode sugerir algo militar (Gatling) ou apenas carga pesada
+            name = "Carroça de Carga Pesada Articulada", -- Anterior: Carroça de Carga 03
+            maxWeight = 1580,                            -- (ex: ~3500 lbs / 1580 kg) Uma grande carroça de frete
+            slots = 80,
+            price = 120,
+            priceGold = 5, -- Ajustado de 18
+            maxAnimals = false,
         },
-        huntercart01 = {                        -- Hash modelo da carroça
-            name = "Carroça de Caça",
-            maxWeight = 100,                    -- Peso máximo que a carroça pode carregar
-            slots = 20,                         -- Número de slots disponíveis na carroça
-            price = 25,                         -- Preço da carroça
-            priceGold = 18,                     -- Preço da carroça em gold
-            maxAnimals = 30,                 -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        huntercart01 = {
+            name = "Carroça de Caçador",
+            maxWeight = 250, -- Para carcaças e peles
+            slots = 50,      -- Espaço para peles e caça variada
+            price = 75,      -- Equipamento especializado
+            priceGold = 3,   -- Ajustado de 18. Original era 30 animais.
+            maxAnimals = 20, -- Unidades de caça média (cervos) ou muitas pequenas
         },
-        oilwagon01x = {                         -- Hash modelo da carroça
-            name = "Transporte de Óleo 01",
-            maxWeight = 100,                    -- Peso máximo que a carroça pode carregar
-            slots = 20,                         -- Número de slots disponíveis na carroça
-            price = 25,                         -- Preço da carroça
-            priceGold = 18,                     -- Preço da carroça em gold
-            maxAnimals = false,                 -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        oilwagon01x = {
+            name = "Carroça-Tanque de Óleo Pequena", -- Anterior: Transporte de Óleo 01
+            maxWeight = 860,                         -- (ex: ~1900 lbs / 860 kg)
+            slots = 8,                               -- Menos slots para barris/tanque
+            price = 85,
+            priceGold = 3,                           -- Ajustado de 18
+            maxAnimals = false,
         },
-        oilwagon02x = {                         -- Hash modelo da carroça
-            name = "Transporte de Óleo 02",
-            maxWeight = 100,                    -- Peso máximo que a carroça pode carregar
-            slots = 20,                         -- Número de slots disponíveis na carroça
-            price = 25,                         -- Preço da carroça
-            priceGold = 18,                     -- Preço da carroça em gold
-            maxAnimals = false,                 -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        oilwagon02x = {
+            name = "Carroça-Tanque de Óleo Grande", -- Anterior: Transporte de Óleo 02
+            maxWeight = 1250,                       -- (ex: ~2750 lbs / 1250 kg)
+            slots = 12,                             -- Mais barris/tanque maior
+            price = 110,
+            priceGold = 4,                          -- Ajustado de 18
+            maxAnimals = false,
         },
-        supplywagon = {                         -- Hash modelo da carroça
-            name = "Carroça de Carga Grande",
-            maxWeight = 100,                    -- Peso máximo que a carroça pode carregar
-            slots = 20,                         -- Número de slots disponíveis na carroça
-            price = 25,                         -- Preço da carroça
-            priceGold = 18,                     -- Preço da carroça em gold
-            maxAnimals = false,                 -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        supplywagon = {
+            name = "Vagão de Suprimentos Grande", -- Anterior: Carroça de Carga Grande
+            maxWeight = 1700,                     -- (ex: ~3750 lbs / 1700 kg) Verdadeira carroça de frete
+            slots = 100,
+            price = 130,
+            priceGold = 5,      -- Ajustado de 18
+            maxAnimals = false, -- Para mercadorias em geral
         },
-        utilliwag = {                           -- Hash modelo da carroça
-            name = "Carroça de Carga Baixa",
-            maxWeight = 100,                    -- Peso máximo que a carroça pode carregar
-            slots = 20,                         -- Número de slots disponíveis na carroça
-            price = 25,                         -- Preço da carroça
-            priceGold = 18,                     -- Preço da carroça em gold
-            maxAnimals = false,                 -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        utilliwag = {
+            name = "Carroça Utilitária Baixa (Buckboard)", -- Anterior: Carroça de Carga Baixa
+            maxWeight = 450,                               -- (ex: ~1000 lbs / 450 kg) Buckboards eram mais leves
+            slots = 40,
+            price = 30,
+            priceGold = 1,  -- Ajustado de 18
+            maxAnimals = 2, -- Poderia levar cães de caça ou alguma caça pequena
         },
-
     },
+
     special = {
-        gatchuck_2 = {            -- Hash modelo da carroça
-            name = "Carroça Armada",
-            maxWeight = 100,      -- Peso máximo que a carroça pode carregar
-            slots = 20,           -- Número de slots disponíveis na carroça
-            price = 25,           -- Preço da carroça
-            priceGold = 18,       -- Preço da carroça em gold
-            maxAnimals = false,   -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        gatchuck_2 = {       -- Hash modelo da carroça
+            name = "Carroça de Combate com Metralhadora",
+            maxWeight = 450, -- Capacidade de carga útil em KG (munição, água, suprimentos para tripulação)
+            slots = 10,      -- Espaços para munição, suprimentos essenciais
+            price = 350,     -- Veículo militar especializado seria caro
+            priceGold = 14,  -- 350 / 25 = 14
+            maxAnimals = false,
         },
-        policewagon01x = {        -- Hash modelo da carroça
-            name = "Carroça da Cavalaria",
-            maxWeight = 100,      -- Peso máximo que a carroça pode carregar
-            slots = 20,           -- Número de slots disponíveis na carroça
-            price = 25,           -- Preço da carroça
-            priceGold = 18,       -- Preço da carroça em gold
-            maxAnimals = false,   -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        policewagon01x = {   -- Hash modelo da carroça
+            name = "Carroção Policial de Patrulha",
+            maxWeight = 700, -- Capacidade em KG (para 8-10 pessoas + equipamento policial)
+            slots = 15,      -- Assentos e espaço para equipamento
+            price = 180,     -- Carroça reforçada e de finalidade específica
+            priceGold = 7,   -- 180 / 25 = 7 (resultado de 7.2 truncado para int)
+            maxAnimals = false,
         },
         policewagongatling01x = { -- Hash modelo da carroça
-            name = "Carroça da Cavalaria Armada",
-            maxWeight = 100,      -- Peso máximo que a carroça pode carregar
-            slots = 20,           -- Número de slots disponíveis na carroça
-            price = 25,           -- Preço da carroça
-            priceGold = 18,       -- Preço da carroça em gold
-            maxAnimals = false,   -- Se a carroça pode carregar animais, colocar maximo ou false/0
+            name = "Carroção Policial Armado",
+            maxWeight = 550,      -- Capacidade de carga útil em KG (munição extra, equipamento tático)
+            slots = 12,           -- Espaços para munição e equipamento tático
+            price = 400,          -- Mais cara devido ao armamento pesado
+            priceGold = 16,       -- 400 / 25 = 16
+            maxAnimals = false,
         },
-        stagecoach004_2x = {      -- Hash modelo da carroça
-            name = "Carruagem Blindada 02",
-            maxWeight = 100,      -- Peso máximo que a carroça pode carregar
-            slots = 20,           -- Número de slots disponíveis na carroça
-            price = 25,           -- Preço da carroça
-            priceGold = 18,       -- Preço da carroça em gold
-            maxAnimals = false,   -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        stagecoach004_2x = { -- Hash modelo da carroça
+            name = "Diligência Blindada Pesada",
+            maxWeight = 800, -- Capacidade em KG (passageiros, bagagem, valores; já considerando o peso da blindagem)
+            slots = 25,      -- Assentos internos, bagageiro, cofre
+            price = 600,     -- Diligências eram caras, blindadas ainda mais
+            priceGold = 24,  -- 600 / 25 = 24
+            maxAnimals = false,
         },
-        stagecoach004x = {         -- Hash modelo da carroça
-            name = "Carruagem Blindada 01",
-            maxWeight = 100,      -- Peso máximo que a carroça pode carregar
-            slots = 20,           -- Número de slots disponíveis na carroça
-            price = 25,           -- Preço da carroça
-            priceGold = 18,       -- Preço da carroça em gold
-            maxAnimals = false,   -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        stagecoach004x = {   -- Hash modelo da carroça
+            name = "Diligência Reforçada",
+            maxWeight = 900, -- Capacidade em KG (passageiros e carga; menos blindagem pode significar maior capacidade de carga útil)
+            slots = 22,      -- Assentos e espaço para carga
+            price = 500,     -- Ainda muito cara
+            priceGold = 20,  -- 500 / 25 = 20
+            maxAnimals = false,
         },
-        wagonarmoured01x = {      -- Hash modelo da carroça
-            name = "Armoured01x",
-            maxWeight = 100,      -- Peso máximo que a carroça pode carregar
-            slots = 20,           -- Número de slots disponíveis na carroça
-            price = 25,           -- Preço da carroça
-            priceGold = 18,       -- Preço da carroça em gold
-            maxAnimals = false,   -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        wagonarmoured01x = { -- Hash modelo da carroça
+            name = "Vagão Blindado de Valores",
+            maxWeight = 500, -- Capacidade de carga em KG para os valores (ex: ouro, documentos); a estrutura já é muito pesada pela blindagem.
+            slots = 10,      -- Espaço interno seguro e limitado
+            price = 700,     -- Extremamente caro devido à blindagem e segurança
+            priceGold = 28,  -- 700 / 25 = 28
+            maxAnimals = false,
         },
-        wagoncircus01x = {        -- Hash modelo da carroça
-            name = "Carroça do Circo 01",
-            maxWeight = 100,      -- Peso máximo que a carroça pode carregar
-            slots = 20,           -- Número de slots disponíveis na carroça
-            price = 25,           -- Preço da carroça
-            priceGold = 18,       -- Preço da carroça em gold
-            maxAnimals = false,   -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        wagoncircus01x = {   -- Hash modelo da carroça
+            name = "Carroça de Circo - Alegorias",
+            maxWeight = 800, -- Capacidade em KG para equipamentos de circo, adereços volumosos
+            slots = 40,      -- Espaço para itens de formatos diversos
+            price = 120,     -- Carroças grandes e decoradas
+            priceGold = 4,   -- 120 / 25 = 4 (resultado de 4.8 truncado para int)
+            maxAnimals = false,
         },
-        wagoncircus02x = {        -- Hash modelo da carroça
-            name = "Carroça do Circo 02",
-            maxWeight = 100,      -- Peso máximo que a carroça pode carregar
-            slots = 20,           -- Número de slots disponíveis na carroça
-            price = 25,           -- Preço da carroça
-            priceGold = 18,       -- Preço da carroça em gold
-            maxAnimals = false,   -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        wagoncircus02x = {   -- Hash modelo da carroça
+            name = "Carroça de Circo - Artistas",
+            maxWeight = 600, -- Capacidade em KG para pessoal do circo e seus pertences/figurinos
+            slots = 30,      -- Espaço para pessoas e seus itens
+            price = 100,
+            priceGold = 4,   -- 100 / 25 = 4
+            maxAnimals = false,
         },
-        wagondairy01x = {         -- Hash modelo da carroça
+        wagondairy01x = {    -- Hash modelo da carroça
             name = "Carroça do Leiteiro",
-            maxWeight = 100,      -- Peso máximo que a carroça pode carregar
-            slots = 20,           -- Número de slots disponíveis na carroça
-            price = 25,           -- Preço da carroça
-            priceGold = 18,       -- Preço da carroça em gold
-            maxAnimals = false,   -- Se a carroça pode carregar animais, colocar maximo ou false/0
+            maxWeight = 400, -- Capacidade em KG (ex: 400 litros de leite em latões, aprox. 400kg + peso dos latões)
+            slots = 50,      -- Espaço para muitos recipientes pequenos
+            price = 70,      -- Custo de uma carroça de entrega especializada
+            priceGold = 2,   -- 70 / 25 = 2 (resultado de 2.8 truncado para int)
+            maxAnimals = false,
         },
-        wagondoc01x = {           -- Hash modelo da carroça
-            name = "Carroça da Farmácia",
-            maxWeight = 100,      -- Peso máximo que a carroça pode carregar
-            slots = 20,           -- Número de slots disponíveis na carroça
-            price = 25,           -- Preço da carroça
-            priceGold = 18,       -- Preço da carroça em gold
-            maxAnimals = false,   -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        wagondoc01x = {      -- Hash modelo da carroça
+            name = "Carroça de Boticário Itinerante",
+            maxWeight = 300, -- Capacidade em KG (medicamentos, elixires, equipamentos de demonstração)
+            slots = 45,      -- Muitos frascos e caixas pequenas
+            price = 90,      -- Carroça especializada
+            priceGold = 3,   -- 90 / 25 = 3 (resultado de 3.6 truncado para int)
+            maxAnimals = false,
         },
-        wagonprison01x = {        -- Hash modelo da carroça
-            name = "Carroça de Prisioneiros",
-            maxWeight = 100,      -- Peso máximo que a carroça pode carregar
-            slots = 20,           -- Número de slots disponíveis na carroça
-            price = 25,           -- Preço da carroça
-            priceGold = 18,       -- Preço da carroça em gold
-            maxAnimals = false,   -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        wagonprison01x = {   -- Hash modelo da carroça
+            name = "Carroça de Transporte de Prisioneiros",
+            maxWeight = 750, -- Capacidade em KG (para 8-10 prisioneiros + guardas)
+            slots = 10,      -- Foco em segurança, celas, não carga diversa
+            price = 200,     -- Carroça reforçada e com celas
+            priceGold = 8,   -- 200 / 25 = 8
+            maxAnimals = false,
         },
-        wagontraveller01x = {     -- Hash modelo da carroça
-            name = "Carroça de Viagem",
-            maxWeight = 100,      -- Peso máximo que a carroça pode carregar
-            slots = 20,           -- Número de slots disponíveis na carroça
-            price = 25,           -- Preço da carroça
-            priceGold = 18,       -- Preço da carroça em gold
-            maxAnimals = false,   -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        wagontraveller01x = { -- Hash modelo da carroça
+            name = "Carroça de Viajante/Comerciante",
+            maxWeight = 500,  -- Capacidade em KG (bagagem pessoal, mercadorias para comércio itinerante)
+            slots = 60,       -- Bom espaço interno e talvez externo
+            price = 110,
+            priceGold = 4,    -- 110 / 25 = 4 (resultado de 4.4 truncado para int)
+            maxAnimals = false,
         },
-        wagonwork01x = {          -- Hash modelo da carroça
-            name = "Carroça do Padeiro",
-            maxWeight = 100,      -- Peso máximo que a carroça pode carregar
-            slots = 20,           -- Número de slots disponíveis na carroça
-            price = 25,           -- Preço da carroça
-            priceGold = 18,       -- Preço da carroça em gold
-            maxAnimals = false,   -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        wagonwork01x = {     -- Hash modelo da carroça
+            name = "Carroça de Entregas Diversas (Ex: Padeiro)",
+            maxWeight = 450, -- Capacidade em KG (pães, sacos de farinha, outras mercadorias de entrega)
+            slots = 55,      -- Adaptável para diferentes tipos de mercadorias
+            price = 75,
+            priceGold = 3,   -- 75 / 25 = 3
+            maxAnimals = false,
         },
-        warwagon2 = {             -- Hash modelo da carroça
-            name = "Torreta Blindada",
-            maxWeight = 100,      -- Peso máximo que a carroça pode carregar
-            slots = 20,           -- Número de slots disponíveis na carroça
-            price = 25,           -- Preço da carroça
-            priceGold = 18,       -- Preço da carroça em gold
-            maxAnimals = false,   -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        warwagon2 = {        -- Hash modelo da carroça
+            name = "Carro de Guerra Blindado com Torreta",
+            maxWeight = 600, -- Capacidade de carga útil em KG (munição pesada, suprimentos para operação prolongada)
+            slots = 8,       -- Espaço interno muito limitado devido à blindagem e mecanismos
+            price = 1000,    -- Um dos veículos mais caros
+            priceGold = 40,  -- 1000 / 25 = 40
+            maxAnimals = false,
         },
     },
     coach = {
-        coach2 = {                            -- Hash modelo da carroça
-            name = "Carruagem 01",            -- Nome que será exibido no menu de compra
-            maxWeight = 50,                   -- Peso máximo que a carroça pode carregar
-            slots = 20,                       -- Número de slots disponíveis na carroça
-            price = 38,                       -- Preço da carroça
-            priceGold = 18,                   -- Preço da carroça em gold
-            maxAnimals = false,               -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        coach2 = {
+            name = "Carruagem Fechada Leve (Brougham)", -- Ex: para 2-4 passageiros distintos
+            maxWeight = 350,                        -- Capacidade em KG (2-3 passageiros + bagagem leve ~75kg/pessoa + 50-125kg bagagem)
+            slots = 8,                              -- Assentos e pequeno espaço para bagagem (ex: 2-3 pessoas + bagagem)
+            price = 250,                            -- Preço de uma carruagem particular elegante, mas não a mais opulenta
+            priceGold = 10,                         -- 250 / 25 = 10
+            maxAnimals = false,
         },
-        coach3 = {                            -- Hash modelo da carroça
-            name = "Carruagem 02",            -- Nome que será exibido no menu de compra
-            maxWeight = 50,                   -- Peso máximo que a carroça pode carregar
-            slots = 20,                       -- Número de slots disponíveis na carroça
-            price = 38,                       -- Preço da carroça
-            priceGold = 18,                   -- Preço da carroça em gold
-            maxAnimals = false,               -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        coach3 = {
+            name = "Carruagem de Aluguel (Fiacre)", -- Para uso urbano, transporte de passageiros
+            maxWeight = 400,                    -- Capacidade em KG (tipicamente 4 passageiros + bagagem leve)
+            slots = 10,                         -- Assentos para 4 e espaço para bagagens de mão
+            price = 220,                        -- Custo para um veículo de serviço robusto
+            priceGold = 8,                      -- 220 / 25 = 8 (8.8 truncado)
+            maxAnimals = false,
         },
-        coach4 = {                            -- Hash modelo da carroça
-            name = "Carruagem 03",            -- Nome que será exibido no menu de compra
-            maxWeight = 50,                   -- Peso máximo que a carroça pode carregar
-            slots = 20,                       -- Número de slots disponíveis na carroça
-            price = 38,                       -- Preço da carroça
-            priceGold = 18,                   -- Preço da carroça em gold
-            maxAnimals = false,               -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        coach4 = {
+            name = "Landau de Passeio", -- Carruagem conversível de luxo
+            maxWeight = 450,        -- Capacidade em KG (4 passageiros confortavelmente + bagagem de dia)
+            slots = 12,             -- Assentos espaçosos e área para cestas de piquenique, etc.
+            price = 350,            -- Veículo de prestígio
+            priceGold = 14,         -- 350 / 25 = 14
+            maxAnimals = false,
         },
-        coach5 = {                            -- Hash modelo da carroça
-            name = "Carruagem 04",            -- Nome que será exibido no menu de compra
-            maxWeight = 50,                   -- Peso máximo que a carroça pode carregar
-            slots = 20,                       -- Número de slots disponíveis na carroça
-            price = 38,                       -- Preço da carroça
-            priceGold = 18,                   -- Preço da carroça em gold
-            maxAnimals = false,               -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        coach5 = {
+            name = "Vitória Elegante", -- Carruagem aberta para 2 passageiros, cocheiro elevado, para passeios
+            maxWeight = 300,       -- Capacidade em KG (2 passageiros + cocheiro + pequena bagagem pessoal)
+            slots = 6,             -- Assentos para 2 + espaço para o cocheiro e itens mínimos
+            price = 300,           -- Carruagem de status, focada na elegância
+            priceGold = 12,        -- 300 / 25 = 12
+            maxAnimals = false,
         },
-        stagecoach001x = {                    -- Hash modelo da carroça
-            name = "Carruagem 05",            -- Nome que será exibido no menu de compra
-            maxWeight = 50,                   -- Peso máximo que a carroça pode carregar
-            slots = 20,                       -- Número de slots disponíveis na carroça
-            price = 38,                       -- Preço da carroça
-            priceGold = 18,                   -- Preço da carroça em gold
-            maxAnimals = false,               -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        stagecoach001x = {
+            name = "Diligência Comum (Concord)", -- Diligência padrão para rotas intermunicipais
+            maxWeight = 700,                 -- Capacidade em KG (6-9 passageiros + bagagem considerável/correio)
+            slots = 20,                      -- Assentos internos, externos no teto, bagageiro traseiro e frontal
+            price = 450,                     -- Custo de uma diligência de linha, robusta e funcional
+            priceGold = 18,                  -- 450 / 25 = 18
+            maxAnimals = false,
         },
-        stagecoach002x = {                    -- Hash modelo da carroça
-            name = "Carruagem 06",            -- Nome que será exibido no menu de compra
-            maxWeight = 50,                   -- Peso máximo que a carroça pode carregar
-            slots = 20,                       -- Número de slots disponíveis na carroça
-            price = 38,                       -- Preço da carroça
-            priceGold = 18,                   -- Preço da carroça em gold
-            maxAnimals = false,               -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        stagecoach002x = {
+            name = "Diligência Rural Leve", -- Menor, para rotas secundárias ou menos passageiros
+            maxWeight = 500,            -- Capacidade em KG (4-6 passageiros + bagagem/correio)
+            slots = 15,                 -- Configuração similar à maior, mas em menor escala
+            price = 380,                -- Mais barata, porém ainda um veículo de serviço essencial
+            priceGold = 15,             -- 380 / 25 = 15 (15.2 truncado)
+            maxAnimals = false,
         },
-        stagecoach005x = {                    -- Hash modelo da carroça
-            name = "Carruagem 07",            -- Nome que será exibido no menu de compra
-            maxWeight = 50,                   -- Peso máximo que a carroça pode carregar
-            slots = 20,                       -- Número de slots disponíveis na carroça
-            price = 38,                       -- Preço da carroça
-            priceGold = 18,                   -- Preço da carroça em gold
-            maxAnimals = false,               -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        stagecoach005x = {
+            name = "Diligência de Viagem Longa (Overland)", -- Para rotas extensas, necessitando maior capacidade e robustez
+            maxWeight = 750,                            -- Capacidade em KG (mais passageiros, carga e suprimentos para a jornada)
+            slots = 22,                                 -- Otimizada para maximizar transporte em longas distâncias
+            price = 500,                                -- Um investimento considerável para operadores de linha
+            priceGold = 20,                             -- 500 / 25 = 20
+            maxAnimals = false,
         },
-        stagecoach006x = {                    -- Hash modelo da carroça
-            name = "Carruagem 08",            -- Nome que será exibido no menu de compra
-            maxWeight = 50,                   -- Peso máximo que a carroça pode carregar
-            slots = 20,                       -- Número de slots disponíveis na carroça
-            price = 38,                       -- Preço da carroça
-            priceGold = 18,                   -- Preço da carroça em gold
-            maxAnimals = false,               -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        stagecoach006x = {
+            name = "Diligência Omnibus Urbana", -- Para transporte em massa dentro de cidades e arredores
+            maxWeight = 1000,               -- Capacidade em KG (projetada para muitos passageiros, pouca bagagem individual)
+            slots = 25,                     -- Foco em número de assentos, tipo "bonde sobre rodas"
+            price = 400,                    -- Veículo de transporte público, construção funcional
+            priceGold = 16,                 -- 400 / 25 = 16
+            maxAnimals = false,
         },
-        stagecoach003x = {                    -- Hash modelo da carroça
-            name = "Carruagem Simples",       -- Nome que será exibido no menu de compra
-            maxWeight = 50,                   -- Peso máximo que a carroça pode carregar
-            slots = 20,                       -- Número de slots disponíveis na carroça
-            price = 38,                       -- Preço da carroça
-            priceGold = 18,                   -- Preço da carroça em gold
-            maxAnimals = false,               -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        stagecoach003x = {
+            name = "Carruagem de Passageiros Simples (Town Coach)", -- Modelo básico fechado para uso urbano ou viagens curtas
+            maxWeight = 400,                                    -- Capacidade em KG (4 passageiros + bagagem leve)
+            slots = 10,                                         -- Similar ao Fiacre, talvez menos ornamentada
+            price = 200,                                        -- Um modelo de entrada para carruagens fechadas
+            priceGold = 8,                                      -- 200 / 25 = 8
+            maxAnimals = false,
         },
-        coach6 = {                            -- Hash modelo da carroça
-            name = "Carruagem Sem Cobertura", -- Nome que será exibido no menu de compra
-            maxWeight = 50,                   -- Peso máximo que a carroça pode carregar
-            slots = 20,                       -- Número de slots disponíveis na carroça
-            price = 38,                       -- Preço da carroça
-            priceGold = 18,                   -- Preço da carroça em gold
-            maxAnimals = false,               -- Se a carroça pode carregar animais, colocar maximo ou false/0
+        coach6 = {
+            name = "Carruagem Aberta de Excursão (Charabanc Leve)", -- Para passeios turísticos ou transporte de grupos
+            maxWeight = 600,                                    -- Capacidade em KG (vários passageiros sentados em fileiras)
+            slots = 18,                                         -- Múltiplos assentos, geralmente abertos
+            price = 320,                                        -- Para transporte de grupos em lazer ou eventos
+            priceGold = 12,                                     -- 320 / 25 = 12 (12.8 truncado)
+            maxAnimals = false,
         },
         buggy01 = {
-            name = "Charrete de Luxo 01",
-            maxWeight = 50,     -- Peso máximo que a carroça pode carregar
-            slots = 20,         -- Número de slots disponíveis na carroça
-            price = 38,         -- Preço da carroça
-            priceGold = 18,     -- Preço da carroça em gold
-            maxAnimals = false, -- Se a carroça pode carregar animais, colocar maximo ou false/0
+            name = "Buggy de Luxo (Capota de Couro)", -- Charrete elegante para uso pessoal
+            maxWeight = 250,                      -- Capacidade em KG (2 passageiros + pequena bagagem de mão ou compras)
+            slots = 5,                            -- Assentos para 2 e espaço mínimo para pertences
+            price = 150,                          -- Buggy de alta qualidade, com acabamentos superiores
+            priceGold = 6,                        -- 150 / 25 = 6
+            maxAnimals = false,
         },
         buggy02 = {
-            name = "Charrete de Luxo 02",
-            maxWeight = 50,     -- Peso máximo que a carroça pode carregar
-            slots = 20,         -- Número de slots disponíveis na carroça
-            price = 38,         -- Preço da carroça
-            priceGold = 18,     -- Preço da carroça em gold
-            maxAnimals = false, -- Se a carroça pode carregar animais, colocar maximo ou false/0
+            name = "Buggy Padrão (Runabout)", -- Charrete comum, leve e ágil para 2 pessoas
+            maxWeight = 200,              -- Capacidade em KG (2 passageiros, sem muita bagagem)
+            slots = 4,                    -- Essencialmente os assentos
+            price = 80,                   -- Um dos veículos de tração animal mais acessíveis e populares
+            priceGold = 3,                -- 80 / 25 = 3 (3.2 truncado)
+            maxAnimals = false,
         },
         buggy03 = {
-            name = "Charrete de Luxo 03",
-            maxWeight = 50,     -- Peso máximo que a carroça pode carregar
-            slots = 20,         -- Número de slots disponíveis na carroça
-            price = 38,         -- Preço da carroça
-            priceGold = 18,     -- Preço da carroça em gold
-            maxAnimals = false, -- Se a carroça pode carregar animais, colocar maximo ou false/0
+            name = "Buggy Familiar (Surrey Leve)", -- Charrete para 4 pessoas, muitas vezes com uma capota leve
+            maxWeight = 350,                   -- Capacidade em KG (4 passageiros, pouca bagagem)
+            slots = 8,                         -- Assentos para quatro, geralmente 2 bancos
+            price = 120,                       -- Opção popular para famílias ou pequenos grupos
+            priceGold = 4,                     -- 120 / 25 = 4 (4.8 truncado)
+            maxAnimals = false,
         },
     }
 }

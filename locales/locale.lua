@@ -41,7 +41,7 @@ Locale = {
         lantern_desc = "Adicione acessórios a sua carroça",
         remove = "Remover",
         cl_wagon_name_exists = "Você já possui uma carroça com esse nome, seu dinheiro foi devolvido",
-        cl_custom_success =  'Customização aplicada com sucesso!',
+        cl_custom_success = 'Customização aplicada com sucesso!',
         activate_wagon = "Ativar/Chamar Carroça",
         left = "Esquerda",
         right = "Direita",
@@ -56,7 +56,7 @@ Locale = {
         no_price = 'Preço da carroça não encontrado!',
         you_sell_wagon = 'Você vendeu sua carroça por ',
         no_wagon_found = 'Nenhuma carroça encontrada!',
-        carry_nothing ='Você não está carregando nada para guardar.',
+        carry_nothing = 'Você não está carregando nada para guardar.',
         closest_to_wagon = 'Você não está perto de uma carroça',
         animals_in_wagon = 'Peles e Carcaças',
         animals_in_wagon_desc = 'Peles ou carcaças guardadas na carroça',
@@ -73,11 +73,14 @@ Locale = {
         have_permission = 'Agora você tem permissão para abrir o inventário da carroça',
         alert = 'Alerta!',
         player_stash = 'A pessoa ',
-        player_stash_02 =' pediu permissão para abrir o inventário da carroça, permitir?',
+        player_stash_02 = ' pediu permissão para abrir o inventário da carroça, permitir?',
         no_have_item = 'Você não possui ',
         fail_lockpick = 'Você falhou',
         wagon_no_animals = 'Não há animais/peles na carroça',
-        no_animals_in_wagon = 'Esta carroça não estoca animais'
+        no_animals_in_wagon = 'Esta carroça não estoca animais',
+        animals = 'Animais: ',
+        slots = 'slots',
+        weight = 'peso'
     },
 
     ["en"] =
@@ -155,7 +158,10 @@ Locale = {
         no_have_item = "You don't have ",
         fail_lockpick = "You failed",
         wagon_no_animals = 'There are no animals/pelts in the wagon',
-        no_animals_in_wagon = "This wagon does not store animals."
+        no_animals_in_wagon = "This wagon does not store animals.",
+        animals = 'Animals: ',
+        slots = 'slots',
+        weight = 'max weigth',
     },
 
 }

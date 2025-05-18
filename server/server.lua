@@ -131,7 +131,7 @@ AddEventHandler("btc-wagons:getWagonDataByCitizenID", function(serverSource)
     end)
 end)
 
-
+local wagons = {}
 
 ------------------- Registrar Carroça -----------------
 RegisterNetEvent("btc-wagons:registerWagon")

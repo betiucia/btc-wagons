@@ -489,7 +489,9 @@ if Config.Target then
             end
         end)
     end
-else
+end
+
+if not Config.Target then
     Citizen.CreateThread(function()
         while true do
             GetClosestWagon(function(wagon, dist, owner, id, model, netId)
@@ -1027,7 +1029,7 @@ function CarcassInWagon(wagonID)
             {
                 title = locale["animals_in_wagon"],
                 subtext = locale["animals_in_wagon_desc"],
-                align = 'top-left',
+                align = Config.PositionMenu,
                 elements = carcassInWagon
             },
             function(data, menu)
